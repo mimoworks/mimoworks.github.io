@@ -20,6 +20,8 @@ The GitHub Pages fallback domain remains:
 - use GitHub Actions
 - build Astro site
 - publish generated static output to Pages
+- in GitHub `Settings` -> `Pages`, set `Build and deployment` source to `GitHub Actions`
+- do not use `Deploy from a branch`; that path runs Jekyll against the Astro source files
 
 ## Important config note
 If using a project site under a subpath, configure the Astro site with the correct `site` and `base` values.
