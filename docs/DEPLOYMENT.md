@@ -4,13 +4,12 @@
 Deploy as a static site on GitHub Pages.
 
 ## Hosting strategy
-### Option A: user / org site
-If you control a GitHub user or org named `mimoworks`, use that and publish at:
-- `https://mimoworks.github.io/`
+### Current production domain
+Use the custom apex domain:
+- `https://mimoworks.app/`
 
-### Option B: project site
-If not, start with a normal repo and publish under your existing GitHub account, for example:
-- `https://<your-username>.github.io/mimoworks/`
+The GitHub Pages fallback domain remains:
+- `https://mimoworks.github.io/`
 
 ## Why GitHub Pages now
 - free / low-friction
@@ -26,18 +25,31 @@ If not, start with a normal repo and publish under your existing GitHub account,
 If using a project site under a subpath, configure the Astro site with the correct `site` and `base` values.
 If later moving to a root custom domain, update those values.
 
-## When to move to custom domain
-Move after:
-- brand name is locked
-- site structure is stable enough
-- you are ready to share publicly more broadly
+## Custom domain setup
+The repo includes `public/CNAME` with `mimoworks.app`.
 
-## Later domain plan
-- register a domain such as `mimoworks.com` if available
-- connect GitHub Pages custom domain
-- verify domain in GitHub
-- turn on HTTPS
+In GitHub:
+1. Open `mimoworks/mimoworks.github.io`.
+2. Go to `Settings` -> `Pages`.
+3. Set `Custom domain` to `mimoworks.app`.
+4. Wait for DNS verification.
+5. Enable `Enforce HTTPS` when available.
+
+At the DNS provider:
+- Add four `A` records for `@`:
+  - `185.199.108.153`
+  - `185.199.109.153`
+  - `185.199.110.153`
+  - `185.199.111.153`
+- Add four `AAAA` records for `@`:
+  - `2606:50c0:8000::153`
+  - `2606:50c0:8001::153`
+  - `2606:50c0:8002::153`
+  - `2606:50c0:8003::153`
+- Add `CNAME www -> mimoworks.github.io`.
+- Remove any conflicting parked-domain, forwarding, or default records for `@` or `www`.
 
 ## Keep in mind
-- root-path assumptions can break if you move from subpath to root later
-- write the site in a way that respects configured base URLs
+- root-path assumptions can break if switching back to a project subpath later
+- keep `BASE_PATH=/` for `mimoworks.app`
+- keep `SITE_URL=https://mimoworks.app` for canonical and Open Graph URLs

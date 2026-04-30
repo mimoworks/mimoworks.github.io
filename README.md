@@ -61,10 +61,16 @@ The current Astro implementation uses normalized data in `src/data/site.ts`, sou
 
 The site is configured for static output. Deployment is handled by `.github/workflows/deploy.yml`.
 
-For a GitHub Pages user or org site such as `https://mimoworks.github.io/`, keep:
+The current production domain is:
 
 ```text
-SITE_URL=https://mimoworks.github.io
+mimoworks.app
+```
+
+For the current custom-domain setup, keep:
+
+```text
+SITE_URL=https://mimoworks.app
 BASE_PATH=/
 ```
 
@@ -77,15 +83,36 @@ BASE_PATH=/<repo>/
 
 Local development works at `/` because Astro uses the local dev server base automatically.
 
-## Custom Domain Later
+## Custom Domain
 
-When moving to a custom domain:
+This repo includes `public/CNAME` with:
 
-1. Add the domain in GitHub Pages settings.
-2. Set the repository variable `SITE_URL` to the full custom domain, for example `https://mimoworks.com`.
-3. Set `BASE_PATH=/`.
-4. Add a `public/CNAME` file only when the domain is confirmed.
-5. Re-run the GitHub Pages workflow.
+```text
+mimoworks.app
+```
+
+In GitHub, configure the repository:
+
+1. Go to `Settings` -> `Pages`.
+2. Under `Custom domain`, enter `mimoworks.app`.
+3. Save and wait for DNS verification.
+4. Enable `Enforce HTTPS` once GitHub allows it.
+
+At the DNS provider, configure the apex domain with GitHub Pages records:
+
+```text
+A     @     185.199.108.153
+A     @     185.199.109.153
+A     @     185.199.110.153
+A     @     185.199.111.153
+AAAA  @     2606:50c0:8000::153
+AAAA  @     2606:50c0:8001::153
+AAAA  @     2606:50c0:8002::153
+AAAA  @     2606:50c0:8003::153
+CNAME www   mimoworks.github.io
+```
+
+The `www` record lets GitHub redirect `www.mimoworks.app` to the apex domain once both variants are recognized.
 
 ## Placeholders to Replace
 

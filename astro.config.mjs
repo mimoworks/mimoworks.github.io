@@ -2,7 +2,7 @@
 import tailwindcss from '@tailwindcss/vite';
 import { defineConfig } from 'astro/config';
 
-const site = process.env.SITE_URL || 'https://mimoworks.github.io';
+const site = process.env.SITE_URL || 'https://mimoworks.app';
 const rawBase = process.env.BASE_PATH || '/';
 const base = rawBase === '/' ? '/' : `/${rawBase.replace(/^\/|\/$/g, '')}/`;
 
