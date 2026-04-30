@@ -1,0 +1,26 @@
+---
+import type { ThemeName } from '../data/site';
+
+interface Props {
+  eyebrow?: string;
+  title?: string;
+  body?: string;
+  theme?: ThemeName;
+  class?: string;
+}
+
+const { eyebrow, title, body, theme = 'core', class: className = '' } = Astro.props;
+---
+
+<section class:list={['section', `section-${theme}`, className]}>
+  <div class="site-shell">
+    {(eyebrow || title || body) && (
+      <div class="section-heading">
+        {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+        {title && <h2>{title}</h2>}
+        {body && <p>{body}</p>}
+      </div>
+    )}
+    <slot />
+  </div>
+</section>

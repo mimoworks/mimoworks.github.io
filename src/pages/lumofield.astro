@@ -1,0 +1,75 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import HeroSection from '../components/HeroSection.astro';
+import SectionWrapper from '../components/SectionWrapper.astro';
+import Card from '../components/Card.astro';
+import CtaBand from '../components/CtaBand.astro';
+import ProductVisual from '../components/ProductVisual.astro';
+import { lumofieldContent, lumofieldPieces, visualAssets } from '../data/site';
+---
+
+<SiteLayout
+  title="Lumofield"
+  description="Warm ambient lamps and future home objects shaped for calm, everyday living."
+  path="/lumofield/"
+  theme="lumofield"
+>
+  <HeroSection
+    {...lumofieldContent.hero}
+    theme="lumofield"
+    visual="lumofield"
+    visualImage={visualAssets.lumofieldHero}
+  />
+
+  <SectionWrapper {...lumofieldContent.overview} theme="lumofield">
+    <div class="feature-layout">
+      <ProductVisual variant="lumofield" image={visualAssets.bedside} compact />
+      <div class="quiet-panel">
+        <p>{lumofieldContent.overview.note}</p>
+      </div>
+    </div>
+  </SectionWrapper>
+
+  <SectionWrapper {...lumofieldContent.collection} theme="lumofield">
+    <div class="card-grid">
+      {
+        lumofieldPieces.map((piece) => (
+          <Card
+            eyebrow={piece.status}
+            title={piece.title}
+            body={piece.body}
+            meta={piece.meta}
+            image={piece.image}
+            theme="lumofield"
+          />
+        ))
+      }
+    </div>
+  </SectionWrapper>
+
+  <SectionWrapper
+    eyebrow={lumofieldContent.contexts.eyebrow}
+    title={lumofieldContent.contexts.title}
+    theme="lumofield"
+  >
+    <div class="card-grid compact-cards">
+      {
+        lumofieldContent.contexts.items.map((item) => (
+          <Card
+            title={item.title}
+            body={item.body}
+            theme="lumofield"
+          />
+        ))
+      }
+    </div>
+  </SectionWrapper>
+
+  <SectionWrapper title={lumofieldContent.principles.title} theme="lumofield">
+    <ul class="principle-grid">
+      {lumofieldContent.principles.items.map((item) => <li>{item}</li>)}
+    </ul>
+  </SectionWrapper>
+
+  <CtaBand {...lumofieldContent.contact} theme="lumofield" />
+</SiteLayout>

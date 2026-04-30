@@ -1,0 +1,25 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import CtaBand from '../components/CtaBand.astro';
+---
+
+<SiteLayout
+  title="Page not found"
+  description="The requested mimoworks page could not be found."
+  path="/404.html"
+  theme="core"
+>
+  <section class="not-found">
+    <div class="site-shell">
+      <p class="eyebrow">404</p>
+      <h1>Page not found.</h1>
+      <p>This page may have moved, or it may belong to a future mimoworks product line.</p>
+    </div>
+  </section>
+
+  <CtaBand
+    title="Return to mimoworks"
+    body="Start from the home page or get in touch if you were looking for something specific."
+    cta={{ label: 'Go home', href: '/' }}
+  />
+</SiteLayout>

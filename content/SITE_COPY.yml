@@ -1,0 +1,92 @@
+site:
+  brand: mimoworks
+  title: mimoworks
+  description: Thoughtful objects and tools, beginning with warm home objects and quietly useful physical products.
+  tagline: Thoughtful objects and tools.
+
+home:
+  hero:
+    eyebrow: mimoworks
+    title: Thoughtful objects and tools.
+    body: A new product studio beginning with warm home objects, led by Lumofield.
+    primaryCta: Explore Lumofield
+    secondaryCta: View Connect
+  intro:
+    title: One studio, different expressions.
+    body: mimoworks is the umbrella for design-led objects and useful physical tools. Lumofield leads with ambient pieces for the home. mimo connect explores practical tap-and-scan products for everyday business spaces.
+  lumofield:
+    title: Lumofield
+    subtitle: Warm light, quiet form.
+    body: Lumofield is the main product line today, with small ambient lighting studies and future home objects made to soften everyday rooms.
+    cta: Visit Lumofield
+  connect:
+    title: mimo connect
+    subtitle: Useful physical prompts for counters, studios, and service desks.
+    body: mimo connect begins with simple NFC review stands and tap-to-action objects that help visitors complete one clear action.
+    cta: Explore Connect
+  values:
+    title: Built with restraint.
+    items:
+      - Warmth over noise
+      - Usefulness without clutter
+      - Objects with a clear place
+  contact:
+    title: Start a quiet conversation.
+    body: Share interest in Lumofield, a future mimo connect pilot, or a thoughtful collaboration.
+    cta: Contact mimoworks
+
+lumofield:
+  hero:
+    eyebrow: lumofield
+    title: Warm light, quiet form.
+    body: Ambient lamps and home objects shaped for bedside, shelf, and desk moments.
+    primaryCta: Enquire
+  overview:
+    title: A first line for softer rooms.
+    body: Lumofield begins with lighting because light changes the feeling of a room before anything else.
+  collection:
+    title: First pieces taking shape.
+    body: Early studies focus on the places where ambient light matters most: the bedside, the shelf, and the desk.
+  principles:
+    title: Design principles
+    items:
+      - soft presence
+      - warm atmosphere
+      - simple forms
+      - tactile restraint
+
+connect:
+  hero:
+    eyebrow: mimo connect
+    title: Connected products for real-world spaces.
+    body: Practical tap-and-scan objects for counters, reception desks, and small business touchpoints.
+    primaryCta: Register interest
+  status:
+    title: Early pilot direction
+    body: The first focus is NFC review stands and branded tap-to-action objects for businesses that need something clear, durable, and easy to explain.
+  useCases:
+    title: Early use cases
+    items:
+      - review stands for counters and reception desks
+      - tap-to-contact displays
+      - branded action points for small businesses
+
+about:
+  hero:
+    title: About mimoworks
+    body: mimoworks is a small umbrella studio for thoughtful physical products and useful tools.
+  story:
+    title: The approach
+    body: Build quietly, keep things useful, and let each product line have its own expression while staying within one clear system.
+
+contact:
+  hero:
+    title: Contact mimoworks
+    body: For Lumofield interest, collaborations, and mimo connect pilots, start here.
+  channels:
+    - label: Lumofield interest
+      body: For early interest in lamps, home objects, styling, or small-batch collaboration.
+    - label: mimo connect pilots
+      body: For review stands, tap-to-action objects, and focused business pilot conversations.
+    - label: Studio collaborations
+      body: For thoughtful partnerships where physical products and quiet utility meet.

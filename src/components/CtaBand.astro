@@ -1,0 +1,26 @@
+---
+import { withBase } from '../utils/url';
+import type { ThemeName } from '../data/site';
+
+interface Props {
+  title: string;
+  body: string;
+  cta: {
+    label: string;
+    href: string;
+  };
+  theme?: ThemeName;
+}
+
+const { title, body, cta, theme = 'core' } = Astro.props;
+---
+
+<section class:list={['cta-band', `cta-${theme}`]}>
+  <div class="site-shell cta-inner">
+    <div>
+      <h2>{title}</h2>
+      <p>{body}</p>
+    </div>
+    <a class="button button-primary" href={withBase(cta.href)}>{cta.label}</a>
+  </div>
+</section>

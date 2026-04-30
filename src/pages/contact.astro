@@ -1,0 +1,31 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import HeroSection from '../components/HeroSection.astro';
+import SectionWrapper from '../components/SectionWrapper.astro';
+import Card from '../components/Card.astro';
+import { contactChannels, contactContent, visualAssets } from '../data/site';
+---
+
+<SiteLayout
+  title="Contact"
+  description="Contact mimoworks for Lumofield interest, mimo connect pilots, collaborations, or custom projects."
+  path="/contact/"
+  theme="core"
+>
+  <HeroSection {...contactContent.hero} theme="core" visual="core" visualImage={visualAssets.studio} />
+
+  <SectionWrapper {...contactContent.intro}>
+    <div class="card-grid contact-grid">
+      {
+        contactChannels.map((channel) => (
+          <Card
+            eyebrow={channel.label}
+            title={channel.value}
+            body={channel.note}
+          />
+        ))
+      }
+    </div>
+    <p class="contact-note">{contactContent.availability}</p>
+  </SectionWrapper>
+</SiteLayout>

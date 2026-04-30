@@ -1,0 +1,14 @@
+<svg width="960" height="720" viewBox="0 0 960 720" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">mimo connect counter stand</title>
+  <desc id="desc">A small NFC review stand on a clean retail counter.</desc>
+  <rect width="960" height="720" fill="#F2F5F6"/>
+  <rect y="440" width="960" height="280" fill="#DDE5EA"/>
+  <rect x="268" y="220" width="248" height="292" rx="28" fill="#FFFFFF" stroke="#CBD6DE" stroke-width="4"/>
+  <rect x="304" y="264" width="176" height="98" rx="18" fill="#DCE8F1"/>
+  <path d="M342 406h100M342 444h72" stroke="#4E6A84" stroke-width="12" stroke-linecap="round"/>
+  <circle cx="650" cy="368" r="58" stroke="#4E6A84" stroke-width="8" opacity=".5"/>
+  <circle cx="650" cy="368" r="28" stroke="#4E6A84" stroke-width="8" opacity=".32"/>
+  <rect x="216" y="512" width="600" height="38" rx="10" fill="#AEBBC4"/>
+  <rect x="250" y="550" width="34" height="96" rx="8" fill="#8EA0AD"/>
+  <rect x="744" y="550" width="34" height="96" rx="8" fill="#8EA0AD"/>
+</svg>

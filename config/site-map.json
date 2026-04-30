@@ -1,0 +1,36 @@
+{
+  "routes": [
+    {
+      "path": "/",
+      "name": "Home",
+      "purpose": "Brand overview and primary funnel into Lumofield"
+    },
+    {
+      "path": "/lumofield/",
+      "name": "Lumofield",
+      "purpose": "Primary product line landing page"
+    },
+    {
+      "path": "/connect/",
+      "name": "Connect",
+      "purpose": "Secondary line / early-stage teaser page"
+    },
+    {
+      "path": "/about/",
+      "name": "About",
+      "purpose": "Explain mimoworks and brand architecture"
+    },
+    {
+      "path": "/contact/",
+      "name": "Contact",
+      "purpose": "Inquiry and contact options"
+    }
+  ],
+  "navigation": [
+    "Home",
+    "Lumofield",
+    "Connect",
+    "About",
+    "Contact"
+  ]
+}

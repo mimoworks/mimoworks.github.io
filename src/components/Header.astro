@@ -1,0 +1,54 @@
+---
+import { navItems, siteMeta } from '../data/site';
+import { withBase } from '../utils/url';
+
+interface Props {
+  currentPath: string;
+}
+
+const { currentPath } = Astro.props;
+---
+
+<header class="site-header">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <div class="site-shell header-inner">
+    <a class="wordmark" href={withBase('/')} aria-label={`${siteMeta.brand} home`}>
+      {siteMeta.brand}
+    </a>
+
+    <nav class="desktop-nav" aria-label="Primary navigation">
+      {
+        navItems.map((item) => (
+          <a
+            href={withBase(item.href)}
+            aria-current={currentPath === item.href ? 'page' : undefined}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <a class="header-cta" href={withBase('/contact/')}>Enquire</a>
+
+    <details class="mobile-nav">
+      <summary aria-label="Open navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </summary>
+      <nav aria-label="Mobile navigation">
+        {
+          navItems.map((item) => (
+            <a
+              href={withBase(item.href)}
+              aria-current={currentPath === item.href ? 'page' : undefined}
+            >
+              {item.label}
+            </a>
+          ))
+        }
+      </nav>
+    </details>
+  </div>
+</header>

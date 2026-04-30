@@ -1,0 +1,28 @@
+<svg width="1200" height="900" viewBox="0 0 1200 900" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Warm Lumofield lamp in a quiet room</title>
+  <desc id="desc">A warm table lamp on a low shelf beside soft fabric and a neutral wall.</desc>
+  <rect width="1200" height="900" fill="#F3E9DB"/>
+  <path d="M0 0h1200v565H0z" fill="#F8F1E8"/>
+  <path d="M0 565h1200v335H0z" fill="#D8C4AC"/>
+  <path d="M812 156c88 33 151 119 151 219 0 129-104 233-233 233S497 504 497 375c0-100 63-186 151-219h164Z" fill="#E6C99E" opacity=".45"/>
+  <rect x="190" y="520" width="620" height="54" rx="8" fill="#7E6C5C"/>
+  <rect x="238" y="574" width="38" height="164" rx="10" fill="#6D5A4A"/>
+  <rect x="722" y="574" width="38" height="164" rx="10" fill="#6D5A4A"/>
+  <rect x="566" y="298" width="188" height="238" rx="92" fill="#C89458"/>
+  <ellipse cx="660" cy="313" rx="98" ry="64" fill="#FFF3CF"/>
+  <ellipse cx="660" cy="314" rx="64" ry="34" fill="#F7D993"/>
+  <path d="M587 410c20 31 44 47 73 47s53-16 73-47v118H587V410Z" fill="#A87A48"/>
+  <rect x="606" y="536" width="108" height="18" rx="9" fill="#695647"/>
+  <rect x="840" y="470" width="145" height="190" rx="14" fill="#F7EFE3"/>
+  <path d="M878 510h69M878 548h84M878 586h56" stroke="#C7B39D" stroke-width="10" stroke-linecap="round"/>
+  <path d="M138 641c74-34 152-34 235 0v88H138v-88Z" fill="#B9A08B"/>
+  <path d="M0 0h1200v900H0z" fill="url(#grain)" opacity=".18"/>
+  <defs>
+    <filter id="noise">
+      <feTurbulence type="fractalNoise" baseFrequency=".8" numOctaves="2" stitchTiles="stitch"/>
+    </filter>
+    <pattern id="grain" width="180" height="180" patternUnits="userSpaceOnUse">
+      <rect width="180" height="180" filter="url(#noise)" opacity=".18"/>
+    </pattern>
+  </defs>
+</svg>

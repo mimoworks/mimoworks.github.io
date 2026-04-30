@@ -1,0 +1,33 @@
+---
+import { withBase } from '../utils/url';
+import type { ImageAsset } from '../data/site';
+
+interface Props {
+  variant?: 'core' | 'lumofield' | 'connect';
+  compact?: boolean;
+  image?: ImageAsset;
+}
+
+const { variant = 'core', compact = false, image } = Astro.props;
+---
+
+<figure class:list={['product-visual', `visual-${variant}`, { compact, 'has-image': image }]}>
+  {
+    image ? (
+      <img
+        src={withBase(image.src)}
+        alt={image.alt}
+        loading={compact ? 'lazy' : 'eager'}
+        decoding="async"
+      />
+    ) : (
+      <div class="visual-fallback" aria-hidden="true">
+        <div class="visual-plane"></div>
+        <div class="visual-object primary-object"></div>
+        <div class="visual-object secondary-object"></div>
+        <div class="visual-line"></div>
+      </div>
+    )
+  }
+  {image?.caption && <figcaption>{image.caption}</figcaption>}
+</figure>

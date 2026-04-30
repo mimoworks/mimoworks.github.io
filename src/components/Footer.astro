@@ -1,0 +1,34 @@
+---
+import { footerContent, footerLinks, siteMeta } from '../data/site';
+import { withBase } from '../utils/url';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="site-shell footer-grid">
+    <div>
+      <a class="wordmark" href={withBase('/')}>{siteMeta.brand}</a>
+      <p>{footerContent.description}</p>
+    </div>
+
+    <nav aria-label="Footer navigation">
+      <p class="footer-label">Explore</p>
+      {
+        footerLinks.map((item) => (
+          <a href={withBase(item.href)}>{item.label}</a>
+        ))
+      }
+    </nav>
+
+    <div>
+      <p class="footer-label">Studio</p>
+      <p>{footerContent.note}</p>
+      <a href={withBase('/contact/')}>Contact</a>
+    </div>
+  </div>
+  <div class="site-shell footer-bottom">
+    <span>Copyright {year} {siteMeta.brand}.</span>
+    <span>Thoughtful objects and tools.</span>
+  </div>
+</footer>

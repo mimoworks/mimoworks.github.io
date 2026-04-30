@@ -1,0 +1,51 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import HeroSection from '../components/HeroSection.astro';
+import SectionWrapper from '../components/SectionWrapper.astro';
+import Card from '../components/Card.astro';
+import CtaBand from '../components/CtaBand.astro';
+import ProductVisual from '../components/ProductVisual.astro';
+import { connectContent, visualAssets } from '../data/site';
+---
+
+<SiteLayout
+  title="mimo connect"
+  description="Practical tap and scan objects for counters, reception desks, and everyday business spaces."
+  path="/connect/"
+  theme="connect"
+>
+  <HeroSection
+    {...connectContent.hero}
+    theme="connect"
+    visual="connect"
+    visualImage={visualAssets.connectHero}
+  />
+
+  <SectionWrapper {...connectContent.overview} theme="connect">
+    <div class="feature-layout">
+      <ProductVisual variant="connect" image={visualAssets.connectHero} compact />
+      <Card
+        title={connectContent.status.title}
+        body={connectContent.status.body}
+        theme="connect"
+      />
+    </div>
+  </SectionWrapper>
+
+  <SectionWrapper title={connectContent.useCases.title} theme="connect">
+    <div class="card-grid">
+      {
+        connectContent.useCases.items.map((item) => (
+          <Card
+            eyebrow="Use case"
+            title={item.title}
+            body={item.body}
+            theme="connect"
+          />
+        ))
+      }
+    </div>
+  </SectionWrapper>
+
+  <CtaBand {...connectContent.contact} theme="connect" />
+</SiteLayout>

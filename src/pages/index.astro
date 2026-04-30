@@ -1,0 +1,101 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import HeroSection from '../components/HeroSection.astro';
+import SectionWrapper from '../components/SectionWrapper.astro';
+import Card from '../components/Card.astro';
+import CtaBand from '../components/CtaBand.astro';
+import ProductVisual from '../components/ProductVisual.astro';
+import { homeContent, lumofieldPieces, siteMeta, visualAssets } from '../data/site';
+import { withBase } from '../utils/url';
+---
+
+<SiteLayout title={siteMeta.title} description={siteMeta.description} path="/" theme="core">
+  <HeroSection
+    {...homeContent.hero}
+    theme="core"
+    visual="lumofield"
+    visualImage={visualAssets.homeHero}
+  />
+
+  <SectionWrapper {...homeContent.intro}>
+    <div class="two-column">
+      <Card
+        {...homeContent.intro.cards[0]}
+        image={visualAssets.bedside}
+      />
+      <Card {...homeContent.intro.cards[1]} image={visualAssets.connectHero} />
+    </div>
+  </SectionWrapper>
+
+  <SectionWrapper
+    eyebrow={homeContent.lumofield.eyebrow}
+    title={homeContent.lumofield.title}
+    body={homeContent.lumofield.subtitle}
+    theme="lumofield"
+    class="feature-section"
+  >
+    <div class="feature-layout">
+      <div>
+        <p>{homeContent.lumofield.body}</p>
+        <ul class="inline-list">
+          {homeContent.lumofield.points.map((point) => <li>{point}</li>)}
+        </ul>
+        <a class="button button-primary" href={withBase(homeContent.lumofield.cta.href)}>
+          {homeContent.lumofield.cta.label}
+        </a>
+      </div>
+      <ProductVisual variant="lumofield" image={visualAssets.shelf} compact />
+    </div>
+  </SectionWrapper>
+
+  <SectionWrapper
+    eyebrow={homeContent.selected.eyebrow}
+    title={homeContent.selected.title}
+    body={homeContent.selected.body}
+    theme="lumofield"
+  >
+    <div class="card-grid">
+      {
+        lumofieldPieces.map((piece) => (
+          <Card
+            eyebrow={piece.status}
+            title={piece.title}
+            body={piece.body}
+            meta={piece.meta}
+            image={piece.image}
+            theme="lumofield"
+          />
+        ))
+      }
+    </div>
+  </SectionWrapper>
+
+  <SectionWrapper
+    eyebrow={homeContent.connect.eyebrow}
+    title={homeContent.connect.title}
+    body={homeContent.connect.subtitle}
+    theme="connect"
+    class="compact-feature"
+  >
+    <div class="feature-layout connect-teaser">
+      <div>
+        <p>{homeContent.connect.body}</p>
+        <a class="button button-secondary" href={withBase(homeContent.connect.cta.href)}>
+          {homeContent.connect.cta.label}
+        </a>
+      </div>
+      <ProductVisual variant="connect" image={visualAssets.connectHero} compact />
+    </div>
+  </SectionWrapper>
+
+  <SectionWrapper
+    eyebrow={homeContent.values.eyebrow}
+    title={homeContent.values.title}
+  >
+    <ul class="value-list">
+      {homeContent.values.items.map((item) => <li>{item}</li>)}
+    </ul>
+  </SectionWrapper>
+
+  <CtaBand {...homeContent.contact} />
+</SiteLayout>

@@ -1,0 +1,15 @@
+<svg width="960" height="720" viewBox="0 0 960 720" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Bedside lamp study</title>
+  <desc id="desc">A compact warm lamp on a bedside table against a quiet cream wall.</desc>
+  <rect width="960" height="720" fill="#F5EDE2"/>
+  <rect y="448" width="960" height="272" fill="#D7C0A6"/>
+  <rect x="112" y="402" width="428" height="44" rx="6" fill="#7E6B5B"/>
+  <rect x="154" y="446" width="28" height="132" rx="9" fill="#645143"/>
+  <rect x="472" y="446" width="28" height="132" rx="9" fill="#645143"/>
+  <rect x="276" y="236" width="138" height="184" rx="66" fill="#BD8750"/>
+  <ellipse cx="345" cy="247" rx="76" ry="44" fill="#FFF1C8"/>
+  <path d="M302 333c12 19 26 29 43 29s31-10 43-29v79h-86v-79Z" fill="#986E45"/>
+  <rect x="610" y="276" width="160" height="210" rx="24" fill="#EFE1D0"/>
+  <path d="M642 328h86M642 371h98M642 414h64" stroke="#C0A990" stroke-width="10" stroke-linecap="round"/>
+  <ellipse cx="343" cy="482" rx="154" ry="26" fill="#7C5F45" opacity=".18"/>
+</svg>

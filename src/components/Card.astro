@@ -1,0 +1,36 @@
+---
+import { withBase } from '../utils/url';
+import type { ImageAsset, ThemeName } from '../data/site';
+
+interface Props {
+  eyebrow?: string;
+  title: string;
+  body: string;
+  href?: string;
+  linkLabel?: string;
+  theme?: ThemeName;
+  image?: ImageAsset;
+  meta?: string;
+}
+
+const { eyebrow, title, body, href, linkLabel = 'Learn more', theme = 'core', image, meta } = Astro.props;
+---
+
+<article class:list={['info-card', `card-${theme}`]}>
+  {
+    image && (
+      <img
+        class="card-image"
+        src={withBase(image.src)}
+        alt={image.alt}
+        loading="lazy"
+        decoding="async"
+      />
+    )
+  }
+  {eyebrow && <p class="card-eyebrow">{eyebrow}</p>}
+  <h3>{title}</h3>
+  <p>{body}</p>
+  {meta && <p class="card-meta">{meta}</p>}
+  {href && <a href={withBase(href)}>{linkLabel}</a>}
+</article>

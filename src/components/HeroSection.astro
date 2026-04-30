@@ -1,0 +1,51 @@
+---
+import ProductVisual from './ProductVisual.astro';
+import { withBase } from '../utils/url';
+import type { ImageAsset, ThemeName } from '../data/site';
+
+interface Cta {
+  label: string;
+  href: string;
+}
+
+interface Props {
+  eyebrow?: string;
+  title: string;
+  body: string;
+  primaryCta?: Cta;
+  secondaryCta?: Cta;
+  theme?: ThemeName;
+  visual?: 'core' | 'lumofield' | 'connect';
+  visualImage?: ImageAsset;
+}
+
+const {
+  eyebrow,
+  title,
+  body,
+  primaryCta,
+  secondaryCta,
+  theme = 'core',
+  visual = 'core',
+  visualImage,
+} = Astro.props;
+---
+
+<section class:list={['hero-section', `hero-${theme}`]}>
+  <div class="site-shell hero-grid">
+    <div class="hero-content">
+      {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+      <h1>{title}</h1>
+      <p class="hero-copy">{body}</p>
+      {(primaryCta || secondaryCta) && (
+        <div class="button-row">
+          {primaryCta && <a class="button button-primary" href={withBase(primaryCta.href)}>{primaryCta.label}</a>}
+          {secondaryCta && <a class="button button-secondary" href={withBase(secondaryCta.href)}>{secondaryCta.label}</a>}
+        </div>
+      )}
+    </div>
+    <div class="hero-media">
+      <ProductVisual variant={visual} image={visualImage} />
+    </div>
+  </div>
+</section>

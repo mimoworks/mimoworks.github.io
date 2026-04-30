@@ -1,0 +1,45 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import HeroSection from '../components/HeroSection.astro';
+import SectionWrapper from '../components/SectionWrapper.astro';
+import Card from '../components/Card.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { aboutContent, visualAssets } from '../data/site';
+---
+
+<SiteLayout
+  title="About"
+  description="mimoworks is an umbrella studio for thoughtful objects and practical tools."
+  path="/about/"
+  theme="core"
+>
+  <HeroSection {...aboutContent.hero} theme="core" visual="core" visualImage={visualAssets.studio} />
+
+  <SectionWrapper {...aboutContent.story}>
+    <div class="two-column">
+      {
+        aboutContent.lines.map((line) => (
+          <Card
+            title={line.title}
+            body={line.body}
+            theme={line.theme}
+          />
+        ))
+      }
+    </div>
+  </SectionWrapper>
+
+  <SectionWrapper title={aboutContent.focus.title} body={aboutContent.focus.body}>
+    <div class="value-list value-list-wide">
+      <span>Lumofield stays primary.</span>
+      <span>mimo connect stays visible but secondary.</span>
+      <span>The shared shell keeps everything recognizably mimoworks.</span>
+    </div>
+  </SectionWrapper>
+
+  <CtaBand
+    title="Have a project in mind?"
+    body="mimoworks is open to product interest, collaborations, and focused pilot conversations."
+    cta={{ label: 'Start a conversation', href: '/contact/' }}
+  />
+</SiteLayout>

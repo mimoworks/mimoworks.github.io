@@ -1,0 +1,14 @@
+<svg width="960" height="720" viewBox="0 0 960 720" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Desk ambient lamp study</title>
+  <desc id="desc">A soft ambient lamp on a work desk with a notebook and pencil.</desc>
+  <rect width="960" height="720" fill="#F4ECE0"/>
+  <rect y="430" width="960" height="290" fill="#CDB69B"/>
+  <rect x="100" y="386" width="760" height="50" rx="8" fill="#705E50"/>
+  <rect x="204" y="278" width="138" height="136" rx="32" fill="#C18A53"/>
+  <ellipse cx="273" cy="284" rx="78" ry="42" fill="#FFF0C2"/>
+  <rect x="220" y="406" width="106" height="18" rx="9" fill="#655244"/>
+  <rect x="468" y="300" width="244" height="150" rx="18" fill="#F5E8D8"/>
+  <path d="M502 340h146M502 380h116" stroke="#BDA58D" stroke-width="10" stroke-linecap="round"/>
+  <path d="M722 282l82-44 12 22-82 44-22 3 10-25Z" fill="#876A4E"/>
+  <ellipse cx="280" cy="465" rx="142" ry="25" fill="#805B35" opacity=".18"/>
+</svg>
