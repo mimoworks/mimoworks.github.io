@@ -17,6 +17,9 @@ interface Props {
   theme?: ThemeName;
   visual?: 'core' | 'lumofield' | 'connect';
   visualImage?: ImageAsset;
+  backgroundImage?: string;
+  backgroundPosition?: string;
+  backgroundPositionMobile?: string;
 }
 
 const {
@@ -28,24 +31,48 @@ const {
   theme = 'core',
   visual = 'core',
   visualImage,
+  backgroundImage,
+  backgroundPosition = '76% center',
+  backgroundPositionMobile = '70% center',
 } = Astro.props;
+
+const heroStyle = backgroundImage
+  ? `--hero-image: url('${withBase(backgroundImage)}'); --hero-image-position: ${backgroundPosition}; --hero-image-position-mobile: ${backgroundPositionMobile};`
+  : undefined;
 ---
 
-<section class:list={['hero-section', `hero-${theme}`]}>
-  <div class="site-shell hero-grid">
+<section
+  class:list={['hero-section', `hero-${theme}`, backgroundImage && 'hero-background']}
+  style={heroStyle}
+>
+  <div class:list={[backgroundImage ? 'hero-inner hero-rail' : 'hero-grid']}>
     <div class="hero-content">
       {eyebrow && <p class="eyebrow">{eyebrow}</p>}
       <h1>{title}</h1>
       <p class="hero-copy">{body}</p>
-      {(primaryCta || secondaryCta) && (
-        <div class="button-row">
-          {primaryCta && <a class="button button-primary" href={withBase(primaryCta.href)}>{primaryCta.label}</a>}
-          {secondaryCta && <a class="button button-secondary" href={withBase(secondaryCta.href)}>{secondaryCta.label}</a>}
+      {
+        (primaryCta || secondaryCta) && (
+          <div class="button-row">
+            {primaryCta && (
+              <a class="button button-primary" href={withBase(primaryCta.href)}>
+                {primaryCta.label}
+              </a>
+            )}
+            {secondaryCta && (
+              <a class="button button-secondary" href={withBase(secondaryCta.href)}>
+                {secondaryCta.label}
+              </a>
+            )}
+          </div>
+        )
+      }
+    </div>
+    {
+      !backgroundImage && (
+        <div class="hero-media">
+          <ProductVisual variant={visual} image={visualImage} />
         </div>
-      )}
-    </div>
-    <div class="hero-media">
-      <ProductVisual variant={visual} image={visualImage} />
-    </div>
+      )
+    }
   </div>
 </section>

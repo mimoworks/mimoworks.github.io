@@ -8,7 +8,13 @@
   },
   "scripts": {
     "dev": "astro dev",
+    "format": "prettier . --write",
+    "format:check": "prettier . --check",
+    "lint": "eslint .",
+    "typecheck": "astro check",
     "build": "astro build",
+    "test:smoke": "playwright test -c playwright.smoke.config.ts",
+    "check": "npm run format:check && npm run lint && npm run typecheck && npm run build && npm run test:smoke",
     "preview": "astro preview",
     "astro": "astro"
   },
@@ -16,7 +22,17 @@
     "astro": "6.1.6"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.9",
+    "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.59.1",
     "@tailwindcss/vite": "4.1.17",
-    "tailwindcss": "4.1.17"
+    "@types/node": "^25.6.0",
+    "eslint": "^10.2.1",
+    "eslint-plugin-astro": "^1.7.0",
+    "prettier": "^3.8.3",
+    "prettier-plugin-astro": "^0.14.1",
+    "tailwindcss": "4.1.17",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.59.1"
   }
 }

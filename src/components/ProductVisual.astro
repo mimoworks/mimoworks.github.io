@@ -11,7 +11,9 @@ interface Props {
 const { variant = 'core', compact = false, image } = Astro.props;
 ---
 
-<figure class:list={['product-visual', `visual-${variant}`, { compact, 'has-image': image }]}>
+<figure
+  class:list={['product-visual', `visual-${variant}`, { compact, 'has-image': image }]}
+>
   {
     image ? (
       <img
@@ -22,10 +24,10 @@ const { variant = 'core', compact = false, image } = Astro.props;
       />
     ) : (
       <div class="visual-fallback" aria-hidden="true">
-        <div class="visual-plane"></div>
-        <div class="visual-object primary-object"></div>
-        <div class="visual-object secondary-object"></div>
-        <div class="visual-line"></div>
+        <div class="visual-plane" />
+        <div class="visual-object primary-object" />
+        <div class="visual-object secondary-object" />
+        <div class="visual-line" />
       </div>
     )
   }

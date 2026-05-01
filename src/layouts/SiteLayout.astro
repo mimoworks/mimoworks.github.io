@@ -49,12 +49,10 @@ const ogImageUrl = absoluteUrl(Astro.site, ogImage);
     <meta name="twitter:card" content="summary_large_image" />
   </head>
   <body style={themeStyle} data-theme={theme}>
-    <div class="page-frame">
-      <Header currentPath={path} />
-      <main id="main-content">
-        <slot />
-      </main>
-      <Footer />
-    </div>
+    <Header currentPath={path} />
+    <main id="main-content">
+      <slot />
+    </main>
+    <Footer />
   </body>
 </html>

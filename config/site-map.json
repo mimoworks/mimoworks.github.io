@@ -26,11 +26,5 @@
       "purpose": "Inquiry and contact options"
     }
   ],
-  "navigation": [
-    "Home",
-    "Lumofield",
-    "Connect",
-    "About",
-    "Contact"
-  ]
+  "navigation": ["Home", "Lumofield", "Connect", "About", "Contact"]
 }

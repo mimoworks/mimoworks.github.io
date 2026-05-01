@@ -13,17 +13,18 @@ import { aboutContent, visualAssets } from '../data/site';
   path="/about/"
   theme="core"
 >
-  <HeroSection {...aboutContent.hero} theme="core" visual="core" visualImage={visualAssets.studio} />
+  <HeroSection
+    {...aboutContent.hero}
+    theme="core"
+    visual="core"
+    visualImage={visualAssets.studio}
+  />
 
   <SectionWrapper {...aboutContent.story}>
     <div class="two-column">
       {
         aboutContent.lines.map((line) => (
-          <Card
-            title={line.title}
-            body={line.body}
-            theme={line.theme}
-          />
+          <Card title={line.title} body={line.body} theme={line.theme} />
         ))
       }
     </div>

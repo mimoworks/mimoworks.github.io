@@ -14,11 +14,7 @@ const year = new Date().getFullYear();
 
     <nav aria-label="Footer navigation">
       <p class="footer-label">Explore</p>
-      {
-        footerLinks.map((item) => (
-          <a href={withBase(item.href)}>{item.label}</a>
-        ))
-      }
+      {footerLinks.map((item) => <a href={withBase(item.href)}>{item.label}</a>)}
     </nav>
 
     <div>

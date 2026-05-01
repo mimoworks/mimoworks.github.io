@@ -17,8 +17,9 @@ import { connectContent, visualAssets } from '../data/site';
   <HeroSection
     {...connectContent.hero}
     theme="connect"
-    visual="connect"
-    visualImage={visualAssets.connectHero}
+    backgroundImage="/images/placeholders/connect-counter.svg"
+    backgroundPosition="84% center"
+    backgroundPositionMobile="74% center"
   />
 
   <SectionWrapper {...connectContent.overview} theme="connect">
@@ -36,12 +37,7 @@ import { connectContent, visualAssets } from '../data/site';
     <div class="card-grid">
       {
         connectContent.useCases.items.map((item) => (
-          <Card
-            eyebrow="Use case"
-            title={item.title}
-            body={item.body}
-            theme="connect"
-          />
+          <Card eyebrow="Use case" title={item.title} body={item.body} theme="connect" />
         ))
       }
     </div>

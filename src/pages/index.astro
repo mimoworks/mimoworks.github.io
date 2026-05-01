@@ -9,21 +9,31 @@ import { homeContent, lumofieldPieces, siteMeta, visualAssets } from '../data/si
 import { withBase } from '../utils/url';
 ---
 
-<SiteLayout title={siteMeta.title} description={siteMeta.description} path="/" theme="core">
+<SiteLayout
+  title={siteMeta.title}
+  description={siteMeta.description}
+  path="/"
+  theme="core"
+>
   <HeroSection
     {...homeContent.hero}
     theme="core"
-    visual="lumofield"
-    visualImage={visualAssets.homeHero}
+    backgroundImage="/images/hero/lumofield-hero.jpg"
+    backgroundPosition="80% center"
+    backgroundPositionMobile="72% center"
   />
 
   <SectionWrapper {...homeContent.intro}>
-    <div class="two-column">
-      <Card
-        {...homeContent.intro.cards[0]}
-        image={visualAssets.bedside}
-      />
-      <Card {...homeContent.intro.cards[1]} image={visualAssets.connectHero} />
+    <div class="brand-overview-grid">
+      <Card {...homeContent.intro.cards[0]} image={visualAssets.bedside} />
+      <aside class="connect-brewing-card">
+        <p class="card-eyebrow">{homeContent.intro.cards[1].eyebrow}</p>
+        <h3>{homeContent.intro.cards[1].title}</h3>
+        <p>{homeContent.intro.cards[1].body}</p>
+        <a href={withBase(homeContent.intro.cards[1].href)}>
+          {homeContent.intro.cards[1].linkLabel}
+        </a>
+      </aside>
     </div>
   </SectionWrapper>
 
@@ -70,28 +80,7 @@ import { withBase } from '../utils/url';
     </div>
   </SectionWrapper>
 
-  <SectionWrapper
-    eyebrow={homeContent.connect.eyebrow}
-    title={homeContent.connect.title}
-    body={homeContent.connect.subtitle}
-    theme="connect"
-    class="compact-feature"
-  >
-    <div class="feature-layout connect-teaser">
-      <div>
-        <p>{homeContent.connect.body}</p>
-        <a class="button button-secondary" href={withBase(homeContent.connect.cta.href)}>
-          {homeContent.connect.cta.label}
-        </a>
-      </div>
-      <ProductVisual variant="connect" image={visualAssets.connectHero} compact />
-    </div>
-  </SectionWrapper>
-
-  <SectionWrapper
-    eyebrow={homeContent.values.eyebrow}
-    title={homeContent.values.title}
-  >
+  <SectionWrapper eyebrow={homeContent.values.eyebrow} title={homeContent.values.title}>
     <ul class="value-list">
       {homeContent.values.items.map((item) => <li>{item}</li>)}
     </ul>

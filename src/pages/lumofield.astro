@@ -17,8 +17,9 @@ import { lumofieldContent, lumofieldPieces, visualAssets } from '../data/site';
   <HeroSection
     {...lumofieldContent.hero}
     theme="lumofield"
-    visual="lumofield"
-    visualImage={visualAssets.lumofieldHero}
+    backgroundImage="/images/hero/lumofield-hero.jpg"
+    backgroundPosition="78% center"
+    backgroundPositionMobile="70% center"
   />
 
   <SectionWrapper {...lumofieldContent.overview} theme="lumofield">
@@ -55,11 +56,7 @@ import { lumofieldContent, lumofieldPieces, visualAssets } from '../data/site';
     <div class="card-grid compact-cards">
       {
         lumofieldContent.contexts.items.map((item) => (
-          <Card
-            title={item.title}
-            body={item.body}
-            theme="lumofield"
-          />
+          <Card title={item.title} body={item.body} theme="lumofield" />
         ))
       }
     </div>

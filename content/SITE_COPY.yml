@@ -21,9 +21,9 @@ home:
     cta: Visit Lumofield
   connect:
     title: mimo connect
-    subtitle: Useful physical prompts for counters, studios, and service desks.
-    body: mimo connect begins with simple NFC review stands and tap-to-action objects that help visitors complete one clear action.
-    cta: Explore Connect
+    subtitle: Something is brewing.
+    body: A quieter connected line is being shaped in the background.
+    cta: View connect note
   values:
     title: Built with restraint.
     items:
@@ -46,7 +46,7 @@ lumofield:
     body: Lumofield begins with lighting because light changes the feeling of a room before anything else.
   collection:
     title: First pieces taking shape.
-    body: Early studies focus on the places where ambient light matters most: the bedside, the shelf, and the desk.
+    body: 'Early studies focus on the places where ambient light matters most: the bedside, the shelf, and the desk.'
   principles:
     title: Design principles
     items:
@@ -58,12 +58,12 @@ lumofield:
 connect:
   hero:
     eyebrow: mimo connect
-    title: Connected products for real-world spaces.
-    body: Practical tap-and-scan objects for counters, reception desks, and small business touchpoints.
+    title: Something is brewing.
+    body: A quieter connected line is in development for practical tap-and-scan objects.
     primaryCta: Register interest
   status:
-    title: Early pilot direction
-    body: The first focus is NFC review stands and branded tap-to-action objects for businesses that need something clear, durable, and easy to explain.
+    title: Quietly in development
+    body: 'The first direction is small and practical: NFC review stands and branded tap-to-action objects for counters, desks, and service spaces.'
   useCases:
     title: Early use cases
     items:

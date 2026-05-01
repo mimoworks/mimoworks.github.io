@@ -12,17 +12,18 @@ import { contactChannels, contactContent, visualAssets } from '../data/site';
   path="/contact/"
   theme="core"
 >
-  <HeroSection {...contactContent.hero} theme="core" visual="core" visualImage={visualAssets.studio} />
+  <HeroSection
+    {...contactContent.hero}
+    theme="core"
+    visual="core"
+    visualImage={visualAssets.studio}
+  />
 
   <SectionWrapper {...contactContent.intro}>
     <div class="card-grid contact-grid">
       {
         contactChannels.map((channel) => (
-          <Card
-            eyebrow={channel.label}
-            title={channel.value}
-            body={channel.note}
-          />
+          <Card eyebrow={channel.label} title={channel.value} body={channel.note} />
         ))
       }
     </div>

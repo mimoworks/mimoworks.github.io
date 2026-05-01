@@ -13,7 +13,16 @@ interface Props {
   meta?: string;
 }
 
-const { eyebrow, title, body, href, linkLabel = 'Learn more', theme = 'core', image, meta } = Astro.props;
+const {
+  eyebrow,
+  title,
+  body,
+  href,
+  linkLabel = 'Learn more',
+  theme = 'core',
+  image,
+  meta,
+} = Astro.props;
 ---
 
 <article class:list={['info-card', `card-${theme}`]}>

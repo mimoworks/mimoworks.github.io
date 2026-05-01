@@ -14,13 +14,15 @@ const { eyebrow, title, body, theme = 'core', class: className = '' } = Astro.pr
 
 <section class:list={['section', `section-${theme}`, className]}>
   <div class="site-shell">
-    {(eyebrow || title || body) && (
-      <div class="section-heading">
-        {eyebrow && <p class="eyebrow">{eyebrow}</p>}
-        {title && <h2>{title}</h2>}
-        {body && <p>{body}</p>}
-      </div>
-    )}
+    {
+      (eyebrow || title || body) && (
+        <div class="section-heading">
+          {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+          {title && <h2>{title}</h2>}
+          {body && <p>{body}</p>}
+        </div>
+      )
+    }
     <slot />
   </div>
 </section>

@@ -14,7 +14,8 @@ export const tokens = brandTokens;
 export const siteMeta = {
   brand: 'mimoworks',
   title: 'mimoworks',
-  description: 'Thoughtful objects and tools, beginning with warm home objects and quietly useful physical products.',
+  description:
+    'Thoughtful objects and tools, beginning with warm home objects and quietly useful physical products.',
   tagline: 'Thoughtful objects and tools.',
   ogImage: '/og-placeholder.svg',
 };
@@ -54,7 +55,7 @@ export const visualAssets = {
   connectHero: {
     src: '/images/placeholders/connect-counter.svg',
     alt: 'Small NFC review stand on a clean retail counter.',
-    caption: 'A practical future branch for real-world touchpoints.',
+    caption: 'Quietly in development.',
   },
   studio: {
     src: '/images/placeholders/studio-objects.svg',
@@ -64,7 +65,8 @@ export const visualAssets = {
 } satisfies Record<string, ImageAsset>;
 
 export const footerContent = {
-  description: 'A small product studio for warm home objects and quietly useful physical tools.',
+  description:
+    'A small product studio for warm home objects and quietly useful physical tools.',
   note: 'Product interest, collaborations, and pilot conversations are welcome through the contact page.',
 };
 
@@ -109,10 +111,10 @@ export const homeContent = {
       },
       {
         eyebrow: 'Future branch',
-        title: 'mimo connect adds utility.',
-        body: 'A practical line for NFC stands and tap-to-action objects, kept secondary to the home-facing work.',
+        title: 'Something is brewing.',
+        body: 'A quieter connected line is in development for practical tap-and-scan objects.',
         href: '/connect/',
-        linkLabel: 'See Connect',
+        linkLabel: 'View the note',
         theme: 'connect' as const,
       },
     ],
@@ -120,7 +122,8 @@ export const homeContent = {
   lumofield: {
     eyebrow: 'Lumofield',
     title: 'Warm light, quiet form.',
-    subtitle: 'The first collection is taking shape around bedside, shelf, and desk moments.',
+    subtitle:
+      'The first collection is taking shape around bedside, shelf, and desk moments.',
     body: 'Lumofield is the main product line today: small ambient lighting studies and future home objects made to soften everyday rooms.',
     cta: { label: 'Visit Lumofield', href: '/lumofield/' },
     points: ['Bedside warmth', 'Shelf presence', 'Desk-side calm'],
@@ -131,20 +134,24 @@ export const homeContent = {
     body: 'Early Lumofield studies are framed around familiar home placements rather than a large catalog.',
   },
   connect: {
-    eyebrow: 'In development',
+    eyebrow: 'Quietly in development',
     title: 'mimo connect',
-    subtitle: 'Useful physical prompts for counters, studios, and service desks.',
-    body: 'mimo connect begins with simple NFC review stands and tap-to-action objects that help visitors complete one clear action.',
-    cta: { label: 'Explore Connect', href: '/connect/' },
+    subtitle: 'Something is brewing.',
+    body: 'A quieter connected line is being shaped in the background.',
+    cta: { label: 'View connect note', href: '/connect/' },
   },
   values: {
     eyebrow: 'Values',
     title: 'Built with restraint.',
-    items: ['Warmth over noise', 'Usefulness without clutter', 'Objects with a clear place'],
+    items: [
+      'Warmth over noise',
+      'Usefulness without clutter',
+      'Objects with a clear place',
+    ],
   },
   contact: {
     title: 'Start a quiet conversation.',
-    body: 'Share interest in Lumofield, a future mimo connect pilot, or a thoughtful collaboration.',
+    body: 'Share interest in Lumofield, a thoughtful collaboration, or an early connected-object idea.',
     cta: { label: 'Contact mimoworks', href: '/contact/' },
   },
 };
@@ -199,18 +206,18 @@ export const lumofieldContent = {
 export const connectContent = {
   hero: {
     eyebrow: 'mimo connect',
-    title: 'Connected products for real-world spaces.',
-    body: 'Practical tap-and-scan objects for counters, reception desks, and small business touchpoints.',
+    title: 'Something is brewing.',
+    body: 'A quieter connected line is in development for practical tap-and-scan objects.',
     primaryCta: { label: 'Register interest', href: '/contact/' },
   },
   overview: {
     eyebrow: 'What it is',
-    title: 'A quiet utility branch.',
-    body: 'mimo connect is being developed for simple actions that benefit from a physical prompt: leaving a review, opening a contact card, or reaching the right link from a counter.',
+    title: 'A future utility branch.',
+    body: 'mimo connect is being shaped around simple physical prompts for useful everyday actions.',
   },
   status: {
-    title: 'Early pilot direction',
-    body: 'The first focus is NFC review stands and branded tap-to-action objects for businesses that need something clear, durable, and easy to explain.',
+    title: 'Quietly in development',
+    body: 'The first direction is small and practical: NFC review stands and branded tap-to-action objects for counters, desks, and service spaces.',
   },
   useCases: {
     title: 'Early use cases',
@@ -230,8 +237,8 @@ export const connectContent = {
     ],
   },
   contact: {
-    title: 'Have a practical pilot use case?',
-    body: 'Share the space, the action, and the kind of visitor or customer you want to support.',
+    title: 'Have a practical use case?',
+    body: 'Share the space and the simple action you want a physical object to support.',
     cta: { label: 'Register interest', href: '/contact/' },
   },
 };
@@ -255,7 +262,7 @@ export const aboutContent = {
     },
     {
       title: 'mimo connect',
-      body: 'A developing utility line for connected physical tools, beginning with review stands and tap-to-action objects.',
+      body: 'Something brewing quietly: a future utility line for connected physical tools.',
       theme: 'connect' as const,
     },
   ],
@@ -276,7 +283,8 @@ export const contactContent = {
     title: 'Share the context first.',
     body: 'The most useful notes are specific: the room, product interest, business space, or collaboration idea you have in mind.',
   },
-  availability: 'For now, enquiries are handled directly by the founder. If this site was shared with you, reply through that channel with the product line and context.',
+  availability:
+    'For now, enquiries are handled directly by the founder. If this site was shared with you, reply through that channel with the product line and context.',
 };
 
 export const lumofieldPieces = [
