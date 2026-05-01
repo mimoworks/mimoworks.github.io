@@ -2,10 +2,9 @@
 import SiteLayout from '../layouts/SiteLayout.astro';
 import HeroSection from '../components/HeroSection.astro';
 import SectionWrapper from '../components/SectionWrapper.astro';
-import Card from '../components/Card.astro';
 import CtaBand from '../components/CtaBand.astro';
 import ProductVisual from '../components/ProductVisual.astro';
-import { lumofieldContent, lumofieldPieces, visualAssets } from '../data/site';
+import { lumofieldContent, lumofieldModularityMode, visualAssets } from '../data/site';
 ---
 
 <SiteLayout
@@ -23,51 +22,78 @@ import { lumofieldContent, lumofieldPieces, visualAssets } from '../data/site';
     backgroundPositionMobile="53% center"
   />
 
-  <SectionWrapper {...lumofieldContent.overview} theme="lumofield">
+  <SectionWrapper
+    {...lumofieldContent.overview}
+    theme="lumofield"
+    class="lumofield-overview"
+  >
     <div class="feature-layout">
-      <ProductVisual variant="lumofield" image={visualAssets.bedside} compact />
-      <div class="quiet-panel">
-        <p>{lumofieldContent.overview.note}</p>
+      <ProductVisual variant="lumofield" image={visualAssets.lumofieldWhatIsIt} compact />
+      <div>
+        <div class="quiet-panel">
+          <p>{lumofieldContent.overview.note}</p>
+        </div>
+        <ul class="inline-list">
+          {lumofieldContent.overview.points.map((point) => <li>{point}</li>)}
+        </ul>
       </div>
     </div>
   </SectionWrapper>
 
-  <SectionWrapper {...lumofieldContent.collection} theme="lumofield">
-    <div class="card-grid">
-      {
-        lumofieldPieces.map((piece) => (
-          <Card
-            eyebrow={piece.status}
-            title={piece.title}
-            body={piece.body}
-            meta={piece.meta}
-            image={piece.image}
-            theme="lumofield"
-          />
-        ))
-      }
-    </div>
+  <SectionWrapper
+    eyebrow={lumofieldContent.atGlance.eyebrow}
+    title={lumofieldContent.atGlance.title}
+    body={lumofieldContent.atGlance.body}
+    theme="lumofield"
+    class="lumofield-glance"
+  >
+    <ul class="proof-list">
+      {lumofieldContent.atGlance.points.map((point) => <li>{point}</li>)}
+    </ul>
+    <p class="contact-note">{lumofieldContent.atGlance.note}</p>
   </SectionWrapper>
 
   <SectionWrapper
     eyebrow={lumofieldContent.contexts.eyebrow}
     title={lumofieldContent.contexts.title}
+    body={lumofieldContent.contexts.body}
     theme="lumofield"
+    class="lumofield-contexts"
   >
     <div class="card-grid compact-cards">
       {
         lumofieldContent.contexts.items.map((item) => (
-          <Card title={item.title} body={item.body} theme="lumofield" />
+          <article class="info-card">
+            <h3>{item.title}</h3>
+            <p>{item.body}</p>
+          </article>
         ))
       }
     </div>
   </SectionWrapper>
 
-  <SectionWrapper title={lumofieldContent.principles.title} theme="lumofield">
-    <ul class="principle-grid">
-      {lumofieldContent.principles.items.map((item) => <li>{item}</li>)}
-    </ul>
-  </SectionWrapper>
+  {
+    lumofieldModularityMode !== 'hidden' && (
+      <SectionWrapper
+        eyebrow={lumofieldContent.modularityTeaser.eyebrow}
+        title={lumofieldContent.modularityTeaser.title}
+        theme="lumofield"
+        class="lumofield-modularity-teaser"
+      >
+        <div class="quiet-panel">
+          <p>{lumofieldContent.modularityTeaser.body}</p>
+          <div class="button-row">
+            <a
+              class="button button-secondary"
+              href={lumofieldContent.modularityTeaser.cta.href}
+            >
+              {lumofieldContent.modularityTeaser.cta.label}
+            </a>
+          </div>
+        </div>
+      </SectionWrapper>
+    )
+  }
 
   <CtaBand {...lumofieldContent.contact} theme="lumofield" />
 </SiteLayout>

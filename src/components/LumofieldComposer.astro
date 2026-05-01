@@ -1,0 +1,183 @@
+---
+import type { lumofieldContent } from '../data/site';
+
+type LumofieldCompose = (typeof lumofieldContent)['compose'];
+
+interface Props {
+  compose: LumofieldCompose;
+}
+
+const { compose } = Astro.props as Props;
+const initialTop = compose.tops[0]?.id;
+const initialBase = compose.bases[0]?.id;
+const initialCombination =
+  compose.combinations.find(
+    (item) => item.top === initialTop && item.base === initialBase,
+  ) ?? compose.combinations[0];
+---
+
+<div class="lumofield-composer" data-lumofield-composer>
+  <script
+    is:inline
+    type="application/json"
+    data-compose-data
+    set:html={JSON.stringify(compose)}
+  />
+  <div class="lumofield-composer-layout">
+    <div class="compose-groups">
+      <p class="compose-group-note">{compose.body}</p>
+
+      <fieldset class="compose-group">
+        <legend>Top</legend>
+        <div class="compose-options">
+          {
+            compose.tops.map((top) => {
+              const isActive = top.id === initialTop;
+              return (
+                <button
+                  type="button"
+                  class:list={['compose-option', isActive && 'is-active']}
+                  data-compose-top={top.id}
+                  aria-pressed={isActive ? 'true' : 'false'}
+                >
+                  {top.label}
+                </button>
+              );
+            })
+          }
+        </div>
+      </fieldset>
+
+      <fieldset class="compose-group">
+        <legend>Base</legend>
+        <div class="compose-options">
+          {
+            compose.bases.map((base) => {
+              const isActive = base.id === initialBase;
+              return (
+                <button
+                  type="button"
+                  class:list={['compose-option', isActive && 'is-active']}
+                  data-compose-base={base.id}
+                  aria-pressed={isActive ? 'true' : 'false'}
+                >
+                  {base.label}
+                </button>
+              );
+            })
+          }
+        </div>
+      </fieldset>
+    </div>
+
+    <article class="compose-preview">
+      <img
+        class="compose-preview-image"
+        data-compose-preview-image
+        src={initialCombination.image.src}
+        alt={initialCombination.image.alt}
+        loading="lazy"
+      />
+      <h3 class="compose-preview-title" data-compose-preview-title>
+        {initialCombination.title}
+      </h3>
+      <p class="compose-preview-body" data-compose-preview-body>
+        {initialCombination.body}
+      </p>
+      <p class="compose-preview-meta" data-compose-preview-meta>
+        {initialCombination.meta}
+      </p>
+    </article>
+  </div>
+</div>
+
+<script is:inline>
+  {
+    const composers = document.querySelectorAll('[data-lumofield-composer]');
+
+    for (const composer of composers) {
+      const dataScript = composer.querySelector('[data-compose-data]');
+
+      if (!(dataScript instanceof HTMLScriptElement) || !dataScript.textContent) {
+        continue;
+      }
+
+      const compose = JSON.parse(dataScript.textContent);
+      const topButtons = Array.from(composer.querySelectorAll('[data-compose-top]'));
+      const baseButtons = Array.from(composer.querySelectorAll('[data-compose-base]'));
+
+      const previewImage = composer.querySelector('[data-compose-preview-image]');
+      const previewTitle = composer.querySelector('[data-compose-preview-title]');
+      const previewBody = composer.querySelector('[data-compose-preview-body]');
+      const previewMeta = composer.querySelector('[data-compose-preview-meta]');
+
+      if (
+        !(previewImage instanceof HTMLImageElement) ||
+        !(previewTitle instanceof HTMLElement) ||
+        !(previewBody instanceof HTMLElement) ||
+        !(previewMeta instanceof HTMLElement)
+      ) {
+        continue;
+      }
+
+      let selectedTop = compose.tops?.[0]?.id;
+      let selectedBase = compose.bases?.[0]?.id;
+
+      const findCombination = () =>
+        compose.combinations.find(
+          (item) => item.top === selectedTop && item.base === selectedBase,
+        ) ?? compose.combinations[0];
+
+      const setActive = (buttons, selectedId, attributeName) => {
+        for (const button of buttons) {
+          if (!(button instanceof HTMLButtonElement)) {
+            continue;
+          }
+          const isActive = button.dataset[attributeName] === selectedId;
+          button.classList.toggle('is-active', isActive);
+          button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+        }
+      };
+
+      const render = () => {
+        const combination = findCombination();
+
+        if (!combination) {
+          return;
+        }
+
+        previewImage.src = combination.image?.src ?? '';
+        previewImage.alt = combination.image?.alt ?? combination.title;
+        previewTitle.textContent = combination.title;
+        previewBody.textContent = combination.body;
+        previewMeta.textContent = combination.meta;
+      };
+
+      for (const button of topButtons) {
+        if (!(button instanceof HTMLButtonElement)) {
+          continue;
+        }
+        button.addEventListener('click', () => {
+          selectedTop = button.dataset.composeTop;
+          setActive(topButtons, selectedTop, 'composeTop');
+          render();
+        });
+      }
+
+      for (const button of baseButtons) {
+        if (!(button instanceof HTMLButtonElement)) {
+          continue;
+        }
+        button.addEventListener('click', () => {
+          selectedBase = button.dataset.composeBase;
+          setActive(baseButtons, selectedBase, 'composeBase');
+          render();
+        });
+      }
+
+      setActive(topButtons, selectedTop, 'composeTop');
+      setActive(baseButtons, selectedBase, 'composeBase');
+      render();
+    }
+  }
+</script>

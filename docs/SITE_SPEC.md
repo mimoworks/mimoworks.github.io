@@ -1,15 +1,10 @@
 # Site specification
 
-## Tech recommendation
+## Platform
 
-Use Astro + TypeScript + Tailwind CSS (static-first).
-
-## Why
-
-- static-first fits the current scope
-- straightforward GitHub Pages deployment
-- easy to maintain
-- good component model without unnecessary app complexity
+- Astro + TypeScript + Tailwind CSS
+- Static-first output for GitHub Pages
+- No backend, CMS, auth, or payments in current scope
 
 ## Route map
 
@@ -22,42 +17,27 @@ Use Astro + TypeScript + Tailwind CSS (static-first).
 
 ## Navigation
 
-### Primary nav
-
-- Home
-- Lumofield
-- Connect
-- About
-- Contact
-
-### Mobile nav
-
-Simple drawer or overlay. Keep it minimal.
+- Primary: Home, Lumofield, Connect, About, Contact
+- Mobile: simple drawer/overlay
+- Keep structure shared across page identities
 
 ## Shared site shell
 
-### Header
+- Shared header/footer, spacing, radius, button anatomy, and content container logic
+- Identity variation comes from typography emphasis, imagery, density, CTA tone, and header mode
+- Homepage must read as **umbrella/editorial studio**, not "Lumofield lite"
 
-- mimoworks wordmark
-- primary nav
-- subtle CTA to Contact / Enquire
+## Launch-state model
 
-### Footer
+`connectMode = "hidden" | "teaser" | "public"`
 
-- mimoworks short description
-- quick links
-- social links placeholder
-- copyright
+Current default: `teaser`
 
-## Home page structure
+Teaser means:
 
-1. Hero
-2. What mimoworks makes
-3. Lumofield spotlight
-4. Selected Lumofield pieces or placeholders
-5. Connect teaser
-6. About / values
-7. Contact CTA
+- Connect exists but remains secondary in main flow
+- Homepage can include restrained "brewing" cues
+- System remains ready for future promotion to `public` without major refactor
 
 ## Hero behavior (implemented direction)
 
@@ -67,38 +47,48 @@ Simple drawer or overlay. Keep it minimal.
 - No page-level card wrapper
 - Full-width sections with inner content containers
 
-## Lumofield page structure
+## Page structures
+
+### Home (`/`) — mimoworks umbrella/editorial
+
+1. Hero (umbrella framing)
+2. What mimoworks makes
+3. Lumofield spotlight
+4. Selected Lumofield studies
+5. Connect teaser (depends on `connectMode`)
+6. Studio values / principles
+7. Contact CTA
+
+### Lumofield (`/lumofield/`) — primary product line
 
 1. Line hero
 2. What Lumofield is
-3. Featured pieces / collection preview
-4. Design principles
-5. Inquiry CTA
+3. Collection studies / first pieces
+4. Placement story / design principles
+5. Enquiry CTA
 
-## Connect page structure
+### Connect (`/connect/`) — secondary practical line
 
 1. Line hero
-2. Short explanation of what it is
-3. Use cases
-4. Coming soon / pilot status
-5. Interest CTA
+2. Clear explanation
+3. Use-case framing
+4. Status (teaser/pilot/public based on `connectMode`)
+5. Practical interest CTA
 
-## About page structure
+### About (`/about/`)
 
-1. mimoworks overview
-2. founder / making philosophy
-3. how product lines fit together
-4. current focus
+1. Umbrella overview
+2. Making philosophy
+3. How lines fit together
+4. Current focus
 
 ## Contact page structure
-
-Keep simple for v1:
 
 - direct enquiry channels from `src/data/site.ts`
 - optional form later
 - optional WhatsApp later
 
-## Content architecture recommendation
+## Content architecture
 
 Store editable content in structured data files where possible.
 Examples:
@@ -108,10 +98,8 @@ Examples:
 - product line summaries
 - call-to-action copy
 
-Current implementation note:
-
-- `src/data/site.ts` is the normalized runtime content source
-- `content/SITE_COPY.yml` and config files remain editable upstream references
+- Runtime normalized source: `src/data/site.ts`
+- Upstream editable references: `content/SITE_COPY.yml`, `config/*.json`
 
 ## Animation guidance
 

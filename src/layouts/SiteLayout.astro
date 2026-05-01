@@ -12,6 +12,7 @@ interface Props {
   path?: string;
   theme?: ThemeName;
   ogImage?: string;
+  headerMode?: 'overlay' | 'solid';
 }
 
 const {
@@ -20,12 +21,15 @@ const {
   path = '/',
   theme = 'core',
   ogImage = siteMeta.ogImage,
+  headerMode,
 } = Astro.props;
 
 const pageTitle = title === siteMeta.title ? title : `${title} | ${siteMeta.brand}`;
 const themeStyle = getThemeStyle(theme);
 const canonical = absoluteUrl(Astro.site, path);
 const ogImageUrl = absoluteUrl(Astro.site, ogImage);
+const overlayPaths = new Set(['/', '/lumofield/']);
+const resolvedHeaderMode = headerMode ?? (overlayPaths.has(path) ? 'overlay' : 'solid');
 ---
 
 <!doctype html>
@@ -46,8 +50,8 @@ const ogImageUrl = absoluteUrl(Astro.site, ogImage);
     <meta property="og:image" content={ogImageUrl} />
     <meta name="twitter:card" content="summary_large_image" />
   </head>
-  <body style={themeStyle} data-theme={theme}>
-    <Header currentPath={path} />
+  <body style={themeStyle} data-theme={theme} data-header-mode={resolvedHeaderMode}>
+    <Header currentPath={path} headerMode={resolvedHeaderMode} />
     <main id="main-content">
       <slot />
     </main>

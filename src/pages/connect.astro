@@ -5,7 +5,12 @@ import SectionWrapper from '../components/SectionWrapper.astro';
 import Card from '../components/Card.astro';
 import CtaBand from '../components/CtaBand.astro';
 import ProductVisual from '../components/ProductVisual.astro';
-import { connectContent, visualAssets } from '../data/site';
+import { connectContent, connectMode, visualAssets } from '../data/site';
+
+const useCases =
+  connectMode === 'teaser'
+    ? connectContent.useCases.items.slice(0, 2)
+    : connectContent.useCases.items;
 ---
 
 <SiteLayout
@@ -17,7 +22,7 @@ import { connectContent, visualAssets } from '../data/site';
   <HeroSection
     {...connectContent.hero}
     theme="connect"
-    backgroundImage="/images/placeholders/connect-counter.svg"
+    backgroundImage="/images/hero/mimoconnect-hero.png"
     backgroundPosition="84% center"
     backgroundPositionTablet="62% center"
     backgroundPositionMobile="56% center"
@@ -34,10 +39,28 @@ import { connectContent, visualAssets } from '../data/site';
     </div>
   </SectionWrapper>
 
-  <SectionWrapper title={connectContent.useCases.title} theme="connect">
+  <SectionWrapper
+    title={connectContent.benefits.title}
+    theme="connect"
+    class="benefits-row"
+  >
+    <div class="card-grid compact-cards">
+      {
+        connectContent.benefits.items.map((item) => (
+          <Card title={item.title} body={item.body} theme="connect" />
+        ))
+      }
+    </div>
+  </SectionWrapper>
+
+  <SectionWrapper
+    title={connectContent.useCases.title}
+    theme="connect"
+    class="use-case-grid"
+  >
     <div class="card-grid">
       {
-        connectContent.useCases.items.map((item) => (
+        useCases.map((item) => (
           <Card eyebrow="Use case" title={item.title} body={item.body} theme="connect" />
         ))
       }

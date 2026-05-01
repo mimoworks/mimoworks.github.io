@@ -1,128 +1,87 @@
 # Brand system
 
-## Umbrella brand: mimoworks
+## Shared brand spine
 
-### Role
+The site is one company with three expressions. These stay shared:
 
-Acts as the parent brand / maker umbrella for physical products now and software later.
-
-### Brand traits
-
-- thoughtful
-- practical
-- quietly creative
-- modern
-- not loud
-
-### Suggested voice
-
-- concise
-- calm
-- grounded
-- warm but not cute
-
-## Product line: Lumofield
-
-### Role
-
-Current main public-facing line, starting with lamps and potentially expanding into home objects.
-
-### Traits
-
-- warm
-- ambient
-- minimal
-- calm
-- design-led
-
-### Visual emphasis
-
-- warm off-whites
-- beige / stone / muted brown
-- soft ambient imagery
-- spacious layouts
-
-### Copy feel
-
-- atmospheric
-- lifestyle-oriented
-- non-technical
-
-## Product line: mimo connect
-
-### Role
-
-Emerging utility-focused line for NFC review stands and related connected physical tools.
-
-### Traits
-
-- clear
-- useful
-- quietly technical
-- practical
-- trustworthy
-
-### Visual emphasis
-
-- cooler neutrals with restrained accent color
-- product-in-context imagery in shops / counters
-- simpler, more explicit benefit-led framing
-
-### Copy feel
-
-- clear outcomes
-- brief explanations
-- low jargon
-
-## Shared design language
-
-These must remain consistent across all lines:
-
-- typography family
-- spacing rhythm
+- header and footer shell
+- spacing discipline and container logic
 - border radius system
-- button hierarchy
-- card design language
-- site-wide navigation and footer
+- button anatomy and interaction rhythm
+- UI/body typography system
+- restrained, calm visual tone
 
-## Typography direction
+Identity must not be differentiated by color alone. Each page identity also differs by:
 
-### Primary
+- imagery direction
+- typography emphasis
+- section density
+- CTA tone
+- header mode
 
-Use a clean sans-serif such as:
+## Font system (shared)
 
-- Inter
-- Geist
-- Satoshi
-- SF Pro fallback where appropriate
+- UI/body: Inter (`/fonts/inter/inter.woff2`)
+- Display/headings: Fraunces (`/fonts/fraunces/fraunces.woff2`)
+- Runtime tokens:
+  - `--font-ui`
+  - `--font-display`
 
-### Style
+Do not load runtime fonts from Google CDN.
 
-- lowercase brand lockups are acceptable
-- avoid overly decorative serif branding for v1
-- use whitespace and scale, not ornament
+## Page identities
 
-## Color direction
+### mimoworks (umbrella)
 
-See `config/brand-tokens.json` for concrete tokens.
+- Role: editorial umbrella and studio framing
+- Tone: thoughtful, restrained, refined, broader than a single product line
+- Typography emphasis: serif-led key statements, balanced with UI sans
+- Imagery: editorial still life, sculptural objects, studio mood
+- Header mode: overlay on hero pages
+- CTA tone: explore, discover, understand the studio
+- Suggested sections: `BrandExpressionsSection`, `StudioPrinciplesBand`
 
-## Logo approach for v1
+### Lumofield (primary line)
 
-- wordmark-first
-- no need for a complex logo icon yet
-- keep marks simple and scalable
+- Role: warm product-line world and collection framing
+- Tone: intimate, tactile, quiet, sensory
+- Typography emphasis: strongest serif presence
+- Imagery: lamp-led domestic placements (bedside, shelf, desk), evening glow
+- Header mode: overlay on hero pages
+- CTA tone: enquire, view collection, express interest
+- Suggested sections: `CollectionStudiesGrid`, `PlacementStorySection`
 
-## Photography / rendering direction
+### Connect (secondary line)
 
-### Lumofield
+- Role: practical business-oriented tools
+- Tone: clear, useful, low-friction, trustworthy
+- Typography emphasis: mostly sans-led, serif used sparingly
+- Imagery: counter/reception/retail/hospitality context, product-in-use
+- Header mode: solid
+- CTA tone: request info, pilot, business contact
+- Suggested sections: `BenefitsRow`, `UseCaseGrid`
 
-- warm home scenes
-- bedside / shelf / corner setups
-- soft indirect light
-- natural material context
+## Launch-state model
 
-### Connect
+`connectMode` controls how Connect appears in public flow:
 
-- countertop / retail / reception scenes
-- real-world use context
-- show tap / scan value clearly
+- `hidden`
+- `teaser`
+- `public`
+
+Current default is `teaser`.
+
+In teaser mode:
+
+- Connect stays secondary in the main flow
+- Homepage can hint that something is brewing
+- Architecture remains ready to promote Connect to public later
+
+## Token source of truth
+
+`config/brand-tokens.json` is the source for:
+
+- runtime page themes
+- identity intent palettes and roles
+- font token references
+- connect launch-state defaults

@@ -16,14 +16,20 @@ import { contactChannels, contactContent, visualAssets } from '../data/site';
     {...contactContent.hero}
     theme="core"
     visual="core"
-    visualImage={visualAssets.studio}
+    visualImage={visualAssets.contactHero}
   />
 
   <SectionWrapper {...contactContent.intro}>
     <div class="card-grid">
       {
         contactChannels.map((channel) => (
-          <Card eyebrow={channel.label} title={channel.value} body={channel.note} />
+          <Card
+            eyebrow={channel.label}
+            title={channel.value}
+            body={channel.note}
+            href={channel.href}
+            linkLabel={channel.linkLabel}
+          />
         ))
       }
     </div>

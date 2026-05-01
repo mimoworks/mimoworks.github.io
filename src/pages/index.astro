@@ -5,11 +5,25 @@ import SectionWrapper from '../components/SectionWrapper.astro';
 import Card from '../components/Card.astro';
 import CtaBand from '../components/CtaBand.astro';
 import ProductVisual from '../components/ProductVisual.astro';
-import { homeContent, lumofieldPieces, siteMeta, visualAssets } from '../data/site';
+import {
+  connectMode,
+  homeLaunchSections,
+  homeContent,
+  lumofieldPieces,
+  showConnectTeaser,
+  siteMeta,
+  visualAssets,
+} from '../data/site';
 import { withBase } from '../utils/url';
 import { getThemeStyle } from '../utils/theme';
 
 const connectThemeStyle = getThemeStyle('connect');
+const heroSecondaryCta =
+  connectMode === 'public'
+    ? homeContent.hero.secondaryCta
+    : connectMode === 'teaser'
+      ? { label: 'Something is brewing', href: '/connect/' }
+      : undefined;
 ---
 
 <SiteLayout
@@ -20,8 +34,9 @@ const connectThemeStyle = getThemeStyle('connect');
 >
   <HeroSection
     {...homeContent.hero}
+    secondaryCta={heroSecondaryCta}
     theme="core"
-    backgroundImage="/images/hero/lumofield-hero.jpg"
+    backgroundImage="/images/hero/mimoworks-hero.png"
     backgroundPosition="80% center"
     backgroundPositionTablet="60% center"
     backgroundPositionMobile="54% center"
@@ -29,17 +44,38 @@ const connectThemeStyle = getThemeStyle('connect');
 
   <SectionWrapper {...homeContent.intro}>
     <div class="brand-overview-grid">
-      <Card {...homeContent.intro.cards[0]} image={visualAssets.bedside} />
-      <aside class="connect-brewing-card" style={connectThemeStyle}>
-        <p class="card-eyebrow">{homeContent.intro.cards[1].eyebrow}</p>
-        <h3>{homeContent.intro.cards[1].title}</h3>
-        <p>{homeContent.intro.cards[1].body}</p>
-        <a href={withBase(homeContent.intro.cards[1].href)}>
-          {homeContent.intro.cards[1].linkLabel}
-        </a>
-      </aside>
+      <Card {...homeContent.intro.cards[0]} image={visualAssets.lumofieldHome} />
+      {
+        showConnectTeaser && (
+          <aside class="connect-brewing-card" style={connectThemeStyle}>
+            <p class="card-eyebrow">{homeContent.intro.cards[1].eyebrow}</p>
+            <h3>{homeContent.intro.cards[1].title}</h3>
+            <p>{homeContent.intro.cards[1].body}</p>
+            <a href={withBase(homeContent.intro.cards[1].href)}>
+              {homeContent.intro.cards[1].linkLabel}
+            </a>
+          </aside>
+        )
+      }
     </div>
   </SectionWrapper>
+
+  {
+    homeLaunchSections.showExpressions && (
+      <SectionWrapper
+        eyebrow={homeContent.expressions.eyebrow}
+        title={homeContent.expressions.title}
+        body={homeContent.expressions.body}
+        class="brand-expressions-section"
+      >
+        <div class="two-column">
+          {homeContent.expressions.items.map((item) => (
+            <Card title={item.title} body={item.body} theme={item.theme} />
+          ))}
+        </div>
+      </SectionWrapper>
+    )
+  }
 
   <SectionWrapper
     eyebrow={homeContent.lumofield.eyebrow}
@@ -58,37 +94,49 @@ const connectThemeStyle = getThemeStyle('connect');
           {homeContent.lumofield.cta.label}
         </a>
       </div>
-      <ProductVisual variant="lumofield" image={visualAssets.shelf} compact />
+      <ProductVisual variant="lumofield" image={visualAssets.lumofieldHome} compact />
     </div>
   </SectionWrapper>
 
-  <SectionWrapper
-    eyebrow={homeContent.selected.eyebrow}
-    title={homeContent.selected.title}
-    body={homeContent.selected.body}
-    theme="lumofield"
-  >
-    <div class="card-grid">
-      {
-        lumofieldPieces.map((piece) => (
-          <Card
-            eyebrow={piece.status}
-            title={piece.title}
-            body={piece.body}
-            meta={piece.meta}
-            image={piece.image}
-            theme="lumofield"
-          />
-        ))
-      }
-    </div>
-  </SectionWrapper>
+  {
+    homeLaunchSections.showSelectedPieces && (
+      <SectionWrapper
+        eyebrow={homeContent.selected.eyebrow}
+        title={homeContent.selected.title}
+        body={homeContent.selected.body}
+        theme="lumofield"
+      >
+        <div class="card-grid">
+          {lumofieldPieces.map((piece) => (
+            <Card
+              eyebrow={piece.status}
+              title={piece.title}
+              body={piece.body}
+              meta={piece.meta}
+              image={piece.image}
+              theme="lumofield"
+            />
+          ))}
+        </div>
+      </SectionWrapper>
+    )
+  }
 
-  <SectionWrapper eyebrow={homeContent.values.eyebrow} title={homeContent.values.title}>
-    <ul class="value-list">
-      {homeContent.values.items.map((item) => <li>{item}</li>)}
-    </ul>
-  </SectionWrapper>
+  {
+    homeLaunchSections.showValues && (
+      <SectionWrapper
+        eyebrow={homeContent.values.eyebrow}
+        title={homeContent.values.title}
+        class="studio-principles-band"
+      >
+        <ul class="value-list">
+          {homeContent.values.items.map((item) => (
+            <li>{item}</li>
+          ))}
+        </ul>
+      </SectionWrapper>
+    )
+  }
 
   <CtaBand {...homeContent.contact} />
 </SiteLayout>

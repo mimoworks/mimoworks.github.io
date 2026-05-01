@@ -38,6 +38,11 @@ Do NOT change these without explicit approval:
 - more B2B / utility oriented
 - should appear as a secondary section or teaser, not as the main focus
 
+## Launch-state rule
+
+- `connectMode` is currently **teaser** by default (`hidden | teaser | public`)
+- In teaser mode, Connect stays visible but secondary in the main public flow
+
 ## Technical constraints
 
 - Static-first architecture only
@@ -106,6 +111,10 @@ If a task changes layout or responsive behavior, also verify at common widths:
 ## Styling rules
 
 - Preserve the existing design system and shell
+- Keep one shared shell with three page identities:
+  - mimoworks = editorial umbrella
+  - Lumofield = warm product-line focus
+  - Connect = practical business-oriented clarity
 - Keep typography, spacing, radius, border, and container logic consistent
 - Avoid one-off pixel nudges unless clearly justified
 - Fix layout issues structurally, not with hacks

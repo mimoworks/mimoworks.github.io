@@ -2,6 +2,8 @@ import brandTokens from '../../config/brand-tokens.json';
 import siteMap from '../../config/site-map.json';
 
 export type ThemeName = keyof typeof brandTokens.themes;
+export type ConnectMode = 'hidden' | 'teaser' | 'public';
+export type LumofieldModularityMode = 'hidden' | 'teaser' | 'public';
 
 export interface ImageAsset {
   src: string;
@@ -11,23 +13,59 @@ export interface ImageAsset {
 
 export const tokens = brandTokens;
 
+const connectModeDefault =
+  brandTokens.launch?.connectMode?.default ?? brandTokens.site?.connectMode?.default;
+
+export const connectMode: ConnectMode =
+  connectModeDefault === 'hidden' || connectModeDefault === 'public'
+    ? connectModeDefault
+    : 'teaser';
+
+export const isConnectPublic = connectMode === 'public';
+export const showConnectTeaser = connectMode !== 'hidden';
+export const lumofieldModularityMode: LumofieldModularityMode = 'teaser';
+export const showAboutPage = false;
+export const homeLaunchSections = {
+  showExpressions: true,
+  showSelectedPieces: false,
+  showValues: false,
+} as const;
+
 export const siteMeta = {
   brand: 'mimoworks',
   title: 'mimoworks',
   description:
-    'Thoughtful objects and tools, beginning with warm home objects and quietly useful physical products.',
+    'An editorial product studio shaping thoughtful objects and practical tools under one calm brand system.',
   tagline: 'Thoughtful objects and tools.',
   ogImage: '/og-placeholder.svg',
 };
 
 const routeByName = new Map(siteMap.routes.map((route) => [route.name, route.path]));
 
-export const navItems = siteMap.navigation.map((name) => ({
-  label: name,
-  href: routeByName.get(name) ?? '/',
-}));
+const rawNavItems = siteMap.navigation
+  .map((name) => ({
+    label: name,
+    href: routeByName.get(name) ?? '/',
+  }))
+  .filter((item) => item.label !== 'Home');
 
-export const footerLinks = navItems.filter((item) => item.label !== 'Home');
+export const navItems = rawNavItems.filter((item) =>
+  item.label === 'Connect'
+    ? isConnectPublic
+    : item.label === 'About'
+      ? showAboutPage
+      : true,
+);
+
+export const footerLinks = rawNavItems.filter((item) => {
+  if (item.label === 'Connect') {
+    return isConnectPublic;
+  }
+  if (item.label === 'About') {
+    return showAboutPage;
+  }
+  return true;
+});
 
 export const visualAssets = {
   bedside: {
@@ -42,6 +80,14 @@ export const visualAssets = {
     src: '/images/placeholders/lumofield-desk.svg',
     alt: 'Soft ambient lamp on a desk with a notebook and pencil.',
   },
+  lumofieldWhatIsIt: {
+    src: '/images/hero/lumofield-whatisit.png',
+    alt: 'Lumofield lamp in a warm home setting, showing the quiet object scale.',
+  },
+  lumofieldHome: {
+    src: '/images/hero/lumofield-whatisit.png',
+    alt: 'Lumofield lamp in a warm home interior.',
+  },
   connectHero: {
     src: '/images/placeholders/connect-counter.svg',
     alt: 'Small NFC review stand on a clean retail counter.',
@@ -52,6 +98,10 @@ export const visualAssets = {
     alt: 'Warm home objects and practical connected tools arranged together.',
     caption: 'One studio, two expressions.',
   },
+  contactHero: {
+    src: '/images/hero/mimoworks-hero.png',
+    alt: 'Warm mimoworks still-life scene for contact page header.',
+  },
 } satisfies Record<string, ImageAsset>;
 
 export const footerContent = {
@@ -61,6 +111,18 @@ export const footerContent = {
 };
 
 export const contactChannels = [
+  {
+    label: 'Email',
+    value: 'mimo.works.wonders@gmail.com',
+    note: 'Best for Lumofield interest, collaborations, and mimo connect pilot conversations.',
+    href: 'mailto:mimo.works.wonders@gmail.com',
+    linkLabel: 'Email mimoworks',
+  },
+  {
+    label: 'Instagram',
+    value: 'Coming soon',
+    note: 'The public Instagram handle will be added soon.',
+  },
   {
     label: 'Lumofield interest',
     value: 'First collection enquiries',
@@ -82,19 +144,19 @@ export const homeContent = {
   hero: {
     eyebrow: 'mimoworks',
     title: 'Thoughtful objects and tools.',
-    body: 'A new product studio beginning with warm home objects, led by Lumofield.',
+    body: 'An umbrella studio building quiet home objects and practical physical tools with one shared language.',
     primaryCta: { label: 'Explore Lumofield', href: '/lumofield/' },
     secondaryCta: { label: 'View Connect', href: '/connect/' },
   },
   intro: {
-    eyebrow: 'What we make',
-    title: 'One studio, different expressions.',
-    body: 'mimoworks is the umbrella for design-led objects and useful physical tools. Lumofield leads with ambient pieces for the home. mimo connect explores practical tap-and-scan products for everyday business spaces.',
+    eyebrow: 'Studio framing',
+    title: 'One company, distinct expressions.',
+    body: 'mimoworks is a studio-led umbrella. Lumofield carries the warm object world. mimo connect develops practical utility objects with a quieter business lens.',
     cards: [
       {
         eyebrow: 'Primary line',
-        title: 'Lumofield leads with warmth.',
-        body: 'The first public expression of mimoworks, shaped around lamps and quiet home objects.',
+        title: 'Lumofield is the lead expression.',
+        body: 'Lamp-led studies and warm home objects anchor the current public face of the studio.',
         href: '/lumofield/',
         linkLabel: 'See Lumofield',
         theme: 'lumofield' as const,
@@ -102,26 +164,42 @@ export const homeContent = {
       {
         eyebrow: 'Future branch',
         title: 'Something is brewing.',
-        body: 'A quieter connected line is in development for practical tap-and-scan objects.',
+        body: 'A practical connected line is developing in the background for business-facing physical tools.',
         href: '/connect/',
         linkLabel: 'View the note',
         theme: 'connect' as const,
       },
     ],
   },
+  expressions: {
+    eyebrow: 'Brand expressions',
+    title: 'Two lines, one studio discipline.',
+    body: 'Different moods, same standards: restraint, practicality, and clear object purpose.',
+    items: [
+      {
+        title: 'Lumofield',
+        body: 'Warm and intimate. Domestic placement and atmosphere lead each object decision.',
+        theme: 'lumofield' as const,
+      },
+      {
+        title: 'mimo connect',
+        body: 'Lighter and practical. Utility, business context, and low-friction use come first.',
+        theme: 'connect' as const,
+      },
+    ],
+  },
   lumofield: {
-    eyebrow: 'Lumofield',
-    title: 'Warm light, quiet form.',
-    subtitle:
-      'The first collection is taking shape around bedside, shelf, and desk moments.',
-    body: 'Lumofield is the main product line today: small ambient lighting studies and future home objects made to soften everyday rooms.',
+    eyebrow: 'Primary product world',
+    title: 'Lumofield leads the current launch.',
+    subtitle: 'The first studies focus on bedside, shelf, and desk placement stories.',
+    body: 'Lumofield is the strongest current expression: intimate lighting objects and warm material moods designed for lived spaces.',
     cta: { label: 'Visit Lumofield', href: '/lumofield/' },
-    points: ['Bedside warmth', 'Shelf presence', 'Desk-side calm'],
+    points: ['Bedside glow', 'Shelf atmosphere', 'Desk-side calm'],
   },
   selected: {
-    eyebrow: 'First pieces',
-    title: 'A focused collection taking shape.',
-    body: 'Early Lumofield studies are framed around familiar home placements rather than a large catalog.',
+    eyebrow: 'Collection studies',
+    title: 'A focused set of first objects.',
+    body: 'The launch direction stays intentionally narrow: fewer pieces, clearer mood, stronger placement logic.',
   },
   connect: {
     eyebrow: 'Quietly in development',
@@ -131,17 +209,17 @@ export const homeContent = {
     cta: { label: 'View connect note', href: '/connect/' },
   },
   values: {
-    eyebrow: 'Values',
-    title: 'Built with restraint.',
+    eyebrow: 'Studio principles',
+    title: 'Editorial restraint, practical intent.',
     items: [
-      'Warmth over noise',
-      'Usefulness without clutter',
-      'Objects with a clear place',
+      'Objects with clear placement',
+      'Calm surfaces over visual noise',
+      'Practical value without clutter',
     ],
   },
   contact: {
-    title: 'Start a quiet conversation.',
-    body: 'Share interest in Lumofield, a thoughtful collaboration, or an early connected-object idea.',
+    title: 'Start a studio conversation.',
+    body: 'Share interest in Lumofield, collaboration ideas, or early practical use cases for connected objects.',
     cta: { label: 'Contact mimoworks', href: '/contact/' },
   },
 };
@@ -150,45 +228,152 @@ export const lumofieldContent = {
   hero: {
     eyebrow: 'lumofield',
     title: 'Warm light, quiet form.',
-    body: 'Ambient lamps and home objects shaped for bedside, shelf, and desk moments.',
+    body: 'An intimate object line shaped around glow, placement, and everyday evening rituals.',
     primaryCta: { label: 'Enquire', href: '/contact/' },
   },
   overview: {
     eyebrow: 'What it is',
-    title: 'A first line for softer rooms.',
-    body: 'Lumofield begins with lighting because light changes the feeling of a room before anything else. The work is warm, minimal, and designed to sit quietly in everyday spaces.',
-    note: 'The first direction is intentionally small: compact forms, warm diffusion, and objects that feel at home beside books, fabric, ceramics, and daily rituals.',
+    title: 'A warm ambient lamp made for real rooms.',
+    body: 'Lumofield begins with one compact lamp designed to live comfortably on bedside tables, shelves, and desks.',
+    note: 'It is easy to place, easy to live with, and shaped to bring calm light into everyday evening routines.',
+    points: [
+      'Soft warm glow',
+      'Compact 150 mm form',
+      'Built for bedside, shelf, and desk',
+    ],
   },
-  collection: {
-    eyebrow: 'Collection preview',
-    title: 'First pieces taking shape.',
-    body: 'Early studies focus on the places where ambient light matters most: the bedside, the shelf, and the desk.',
+  atGlance: {
+    eyebrow: 'At a glance',
+    title: 'Practical details, kept simple.',
+    body: 'A quick proof row for fit, compatibility, and everyday use.',
+    points: [
+      '3D-printed body',
+      'CE-certified cordset',
+      'E14 bulb compatible',
+      'Tool-free top and base swapping',
+      'Approx. 150 × 150 × 150 mm',
+      'Warm bulb recommended',
+    ],
+    note: 'Cord dimming is not built in. Compatible smart bulbs can be used. Max wattage should follow local Singapore electrical guidance.',
   },
   contexts: {
-    eyebrow: 'Use context',
-    title: 'Designed around familiar placements.',
+    eyebrow: 'Where it belongs',
+    title: 'Designed for real surfaces and evening routines.',
+    body: 'Lumofield is built around three practical placements rather than one generic lamp idea.',
     items: [
       {
         title: 'Bedside',
-        body: 'Low, warm light for evening routines and quieter starts.',
+        body: 'Low warm light for winding down, softer waking, and calmer room edges.',
       },
       {
         title: 'Shelf',
-        body: 'A calm object presence that sits with books, ceramics, and small keepsakes.',
+        body: 'A sculptural glow that sits comfortably with books, ceramics, and collected objects.',
       },
       {
         title: 'Desk',
-        body: 'Ambient support for focused work without turning the surface into a task lamp.',
+        body: 'Ambient support for focused work where presence matters more than harsh output.',
       },
     ],
   },
-  principles: {
-    title: 'Design principles',
-    items: ['Soft presence', 'Warm atmosphere', 'Simple forms', 'Tactile restraint'],
+  modularityTeaser: {
+    eyebrow: 'A modular direction',
+    title: 'Swappable tops and bases, brewing quietly.',
+    body: 'Lumofield is being shaped as an open mix-and-match system. The first lamp comes first; more pairings will follow.',
+    cta: { label: 'Ask about future pairings', href: '/contact/' },
+  },
+  compose: {
+    eyebrow: 'Compose your light',
+    title: 'Choose a top and a base.',
+    body: 'A preview system for future pairings when modularity moves to public mode.',
+    tops: [
+      {
+        id: 'soft',
+        label: 'Soft dome',
+        description: 'A gentler silhouette for softer room mood.',
+      },
+      {
+        id: 'wide',
+        label: 'Wide shade',
+        description: 'A broader top for lower, calmer spread.',
+      },
+      {
+        id: 'tapered',
+        label: 'Tapered shade',
+        description: 'A tighter silhouette with a more sculptural stance.',
+      },
+    ],
+    bases: [
+      {
+        id: 'pebble',
+        label: 'Pebble base',
+        description: 'Rounded and softer in presence.',
+      },
+      {
+        id: 'column',
+        label: 'Column base',
+        description: 'Taller and more architectural.',
+      },
+    ],
+    combinations: [
+      {
+        id: 'soft-pebble',
+        top: 'soft',
+        base: 'pebble',
+        title: 'Bedside calm',
+        body: 'A softer silhouette for nightstands and slower evening routines.',
+        meta: 'Soft dome + pebble base',
+        image: visualAssets.bedside,
+      },
+      {
+        id: 'soft-column',
+        top: 'soft',
+        base: 'column',
+        title: 'Shelf glow',
+        body: 'A taller stance that reads well beside books and smaller objects.',
+        meta: 'Soft dome + column base',
+        image: visualAssets.shelf,
+      },
+      {
+        id: 'wide-pebble',
+        top: 'wide',
+        base: 'pebble',
+        title: 'Low spread',
+        body: 'A broader top that creates gentle ambient spread across lower surfaces.',
+        meta: 'Wide shade + pebble base',
+        image: visualAssets.desk,
+      },
+      {
+        id: 'wide-column',
+        top: 'wide',
+        base: 'column',
+        title: 'Desk atmosphere',
+        body: 'A more architectural pairing for quieter desks and focused work.',
+        meta: 'Wide shade + column base',
+        image: visualAssets.shelf,
+      },
+      {
+        id: 'tapered-pebble',
+        top: 'tapered',
+        base: 'pebble',
+        title: 'Compact warmth',
+        body: 'A tapered silhouette that feels neat, calm, and easy to place.',
+        meta: 'Tapered shade + pebble base',
+        image: visualAssets.bedside,
+      },
+      {
+        id: 'tapered-column',
+        top: 'tapered',
+        base: 'column',
+        title: 'Sculptural height',
+        body: 'A more vertical pairing for shelves, corners, and calmer statement placement.',
+        meta: 'Tapered shade + column base',
+        image: visualAssets.desk,
+      },
+    ],
   },
   contact: {
-    title: 'Interested in Lumofield?',
-    body: 'Share the kind of room, placement, or collaboration you have in mind.',
+    title: 'Interested in the first Lumofield lamp?',
+    body: 'Share your room, surface, or use context and we can guide the right first fit.',
     cta: { label: 'Enquire about Lumofield', href: '/contact/' },
   },
 };
@@ -196,18 +381,35 @@ export const lumofieldContent = {
 export const connectContent = {
   hero: {
     eyebrow: 'mimo connect',
-    title: 'Something is brewing.',
-    body: 'A quieter connected line is in development for practical tap-and-scan objects.',
-    primaryCta: { label: 'Register interest', href: '/contact/' },
+    title: 'Practical connected tools, quietly developing.',
+    body: 'A cleaner utility branch for tap-and-scan actions in real business spaces.',
+    primaryCta: { label: 'Request information', href: '/contact/' },
   },
   overview: {
     eyebrow: 'What it is',
-    title: 'A future utility branch.',
-    body: 'mimo connect is being shaped around simple physical prompts for useful everyday actions.',
+    title: 'A practical business-facing branch.',
+    body: 'mimo connect focuses on physical prompts that make simple business actions faster and clearer.',
   },
   status: {
-    title: 'Quietly in development',
-    body: 'The first direction is small and practical: NFC review stands and branded tap-to-action objects for counters, desks, and service spaces.',
+    title: 'Current launch state: teaser',
+    body: 'The line is visible and evolving, with early pilots around NFC stands and focused tap-to-action objects.',
+  },
+  benefits: {
+    title: 'Why it is useful',
+    items: [
+      {
+        title: 'Faster guest action',
+        body: 'Clear physical prompts reduce friction at counters and reception points.',
+      },
+      {
+        title: 'Cleaner business touchpoints',
+        body: 'Compact objects keep key actions visible without visual clutter.',
+      },
+      {
+        title: 'Simple pilot setup',
+        body: 'Early deployments are scoped, practical, and easy to test in live spaces.',
+      },
+    ],
   },
   useCases: {
     title: 'Early use cases',
@@ -227,9 +429,9 @@ export const connectContent = {
     ],
   },
   contact: {
-    title: 'Have a practical use case?',
-    body: 'Share the space and the simple action you want a physical object to support.',
-    cta: { label: 'Register interest', href: '/contact/' },
+    title: 'Planning a pilot or practical use case?',
+    body: 'Share your business context, surface location, and the one action you want to make easier.',
+    cta: { label: 'Request connect information', href: '/contact/' },
   },
 };
 
@@ -274,7 +476,7 @@ export const contactContent = {
     body: 'The most useful notes are specific: the room, product interest, business space, or collaboration idea you have in mind.',
   },
   availability:
-    'For now, enquiries are handled directly by the founder. If this site was shared with you, reply through that channel with the product line and context.',
+    'Enquiries are handled directly by the founder. Email is the active contact channel right now; Instagram will follow shortly.',
 };
 
 export const lumofieldPieces = [

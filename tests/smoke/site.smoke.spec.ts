@@ -23,19 +23,38 @@ test.describe('mimoworks smoke', () => {
 
   test('key navigation links resolve', async ({ page }) => {
     await page.goto('/');
-    const nav = page.locator('header nav').first();
-    const links = [
-      { name: /home/i, path: '/' },
+    const header = page.locator('header').first();
+    const nav = header.locator('nav').first();
+
+    await header
+      .getByRole('link', { name: /mimoworks home/i })
+      .first()
+      .click();
+    await expect(page).toHaveURL(/\/$/);
+
+    const baseLinks = [
       { name: /lumofield/i, path: '/lumofield/' },
-      { name: /connect/i, path: '/connect/' },
-      { name: /about/i, path: '/about/' },
       { name: /contact/i, path: '/contact/' },
     ];
 
-    for (const link of links) {
+    for (const link of baseLinks) {
       await nav.getByRole('link', { name: link.name }).first().click();
       const pathname = await page.evaluate(() => window.location.pathname);
       expect(pathname.endsWith(link.path)).toBeTruthy();
+    }
+
+    const connectLink = nav.getByRole('link', { name: /connect/i }).first();
+    if (await connectLink.isVisible()) {
+      await connectLink.click();
+      const pathname = await page.evaluate(() => window.location.pathname);
+      expect(pathname.endsWith('/connect/')).toBeTruthy();
+    }
+
+    const aboutLink = nav.getByRole('link', { name: /about/i }).first();
+    if (await aboutLink.isVisible()) {
+      await aboutLink.click();
+      const pathname = await page.evaluate(() => window.location.pathname);
+      expect(pathname.endsWith('/about/')).toBeTruthy();
     }
   });
 

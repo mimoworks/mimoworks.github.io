@@ -4,12 +4,13 @@ import { withBase } from '../utils/url';
 
 interface Props {
   currentPath: string;
+  headerMode?: 'overlay' | 'solid';
 }
 
-const { currentPath } = Astro.props;
+const { currentPath, headerMode = 'solid' } = Astro.props;
 ---
 
-<header class="site-header">
+<header class:list={['site-header', `site-header-${headerMode}`]}>
   <a class="skip-link" href="#main-content">Skip to content</a>
   <div class="site-shell header-inner">
     <a class="wordmark" href={withBase('/')} aria-label={`${siteMeta.brand} home`}>
