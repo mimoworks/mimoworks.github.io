@@ -1,8 +1,8 @@
-# Deployment plan
+# Deployment
 
-## Recommended path now
+## Current strategy
 
-Deploy as a static site on GitHub Pages.
+Deploy as a static Astro site on GitHub Pages.
 
 ## Hosting strategy
 
@@ -24,16 +24,27 @@ The GitHub Pages fallback domain remains:
 
 ## Deployment implementation
 
-- use GitHub Actions
-- build Astro site
-- publish generated static output to Pages
-- in GitHub `Settings` -> `Pages`, set `Build and deployment` source to `GitHub Actions`
-- do not use `Deploy from a branch`; that path runs Jekyll against the Astro source files
+- Use GitHub Actions.
+- Run quality checks in `.github/workflows/quality.yml`.
+- Build and deploy in `.github/workflows/deploy.yml`.
+- In GitHub `Settings` -> `Pages`, set `Build and deployment` source to `GitHub Actions`.
+- Do not use `Deploy from a branch`; that path runs Jekyll against Astro source files.
 
-## Important config note
+## Base-path config
 
-If using a project site under a subpath, configure the Astro site with the correct `site` and `base` values.
-If later moving to a root custom domain, update those values.
+Set these repository variables in GitHub:
+
+```text
+SITE_URL=https://mimoworks.app
+BASE_PATH=/
+```
+
+For project-site deployment under a subpath:
+
+```text
+SITE_URL=https://<owner>.github.io
+BASE_PATH=/<repo>/
+```
 
 ## Custom domain setup
 
@@ -64,6 +75,6 @@ At the DNS provider:
 
 ## Keep in mind
 
-- root-path assumptions can break if switching back to a project subpath later
-- keep `BASE_PATH=/` for `mimoworks.app`
-- keep `SITE_URL=https://mimoworks.app` for canonical and Open Graph URLs
+- Root-path assumptions can break if switching back to a project subpath later.
+- Keep `BASE_PATH=/` for `mimoworks.app`.
+- Keep `SITE_URL=https://mimoworks.app` for canonical and Open Graph URLs.

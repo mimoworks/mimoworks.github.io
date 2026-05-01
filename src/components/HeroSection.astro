@@ -19,7 +19,9 @@ interface Props {
   visualImage?: ImageAsset;
   backgroundImage?: string;
   backgroundPosition?: string;
+  backgroundPositionTablet?: string;
   backgroundPositionMobile?: string;
+  fadeTarget?: string;
 }
 
 const {
@@ -33,40 +35,35 @@ const {
   visualImage,
   backgroundImage,
   backgroundPosition = '76% center',
+  backgroundPositionTablet = '58% center',
   backgroundPositionMobile = '70% center',
+  fadeTarget,
 } = Astro.props;
 
-const heroStyle = backgroundImage
-  ? `--hero-image: url('${withBase(backgroundImage)}'); --hero-image-position: ${backgroundPosition}; --hero-image-position-mobile: ${backgroundPositionMobile};`
-  : undefined;
+const heroStyleParts: string[] = [];
+
+if (backgroundImage) {
+  heroStyleParts.push(
+    `--hero-image: url('${withBase(backgroundImage)}')`,
+    `--hero-image-position: ${backgroundPosition}`,
+    `--hero-image-position-tablet: ${backgroundPositionTablet}`,
+    `--hero-image-position-mobile: ${backgroundPositionMobile}`,
+  );
+}
+
+if (fadeTarget) {
+  heroStyleParts.push(`--hero-fade-target: ${fadeTarget}`);
+}
+
+const heroStyle = heroStyleParts.length > 0 ? heroStyleParts.join('; ') : undefined;
 ---
 
 <section
   class:list={['hero-section', `hero-${theme}`, backgroundImage && 'hero-background']}
   style={heroStyle}
 >
-  <div class:list={[backgroundImage ? 'hero-inner hero-rail' : 'hero-grid']}>
-    <div class="hero-content">
-      {eyebrow && <p class="eyebrow">{eyebrow}</p>}
-      <h1>{title}</h1>
-      <p class="hero-copy">{body}</p>
-      {
-        (primaryCta || secondaryCta) && (
-          <div class="button-row">
-            {primaryCta && (
-              <a class="button button-primary" href={withBase(primaryCta.href)}>
-                {primaryCta.label}
-              </a>
-            )}
-            {secondaryCta && (
-              <a class="button button-secondary" href={withBase(secondaryCta.href)}>
-                {secondaryCta.label}
-              </a>
-            )}
-          </div>
-        )
-      }
-    </div>
+  {backgroundImage && <div class="hero-mobile-media" aria-hidden="true" />}
+  <div class:list={['site-shell hero-shell', backgroundImage && 'hero-rail']}>
     {
       !backgroundImage && (
         <div class="hero-media">
@@ -74,5 +71,28 @@ const heroStyle = backgroundImage
         </div>
       )
     }
+    <div class="hero-content">
+      <div>
+        {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+        <h1>{title}</h1>
+        <p class="hero-copy">{body}</p>
+        {
+          (primaryCta || secondaryCta) && (
+            <div class="button-row">
+              {primaryCta && (
+                <a class="button button-primary" href={withBase(primaryCta.href)}>
+                  {primaryCta.label}
+                </a>
+              )}
+              {secondaryCta && (
+                <a class="button button-secondary" href={withBase(secondaryCta.href)}>
+                  {secondaryCta.label}
+                </a>
+              )}
+            </div>
+          )
+        }
+      </div>
+    </div>
   </div>
 </section>

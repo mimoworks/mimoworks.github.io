@@ -30,16 +30,6 @@ export const navItems = siteMap.navigation.map((name) => ({
 export const footerLinks = navItems.filter((item) => item.label !== 'Home');
 
 export const visualAssets = {
-  homeHero: {
-    src: '/images/placeholders/lumofield-hero.svg',
-    alt: 'Warm Lumofield lamp on a low shelf in a quiet neutral room.',
-    caption: 'Lumofield leads the first mimoworks collection.',
-  },
-  lumofieldHero: {
-    src: '/images/placeholders/lumofield-hero.svg',
-    alt: 'Warm ambient lamp beside soft fabric and a neutral wall.',
-    caption: 'Warm light for slower rooms.',
-  },
   bedside: {
     src: '/images/placeholders/lumofield-bedside.svg',
     alt: 'Compact warm bedside lamp on a wooden table.',

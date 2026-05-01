@@ -1,6 +1,7 @@
 ---
 import { withBase } from '../utils/url';
 import type { ImageAsset, ThemeName } from '../data/site';
+import { getThemeStyle } from '../utils/theme';
 
 interface Props {
   eyebrow?: string;
@@ -19,13 +20,15 @@ const {
   body,
   href,
   linkLabel = 'Learn more',
-  theme = 'core',
+  theme,
   image,
   meta,
 } = Astro.props;
+
+const themeStyle = getThemeStyle(theme);
 ---
 
-<article class:list={['info-card', `card-${theme}`]}>
+<article class="info-card" style={themeStyle}>
   {
     image && (
       <img

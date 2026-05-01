@@ -37,7 +37,8 @@
       "text": "#1F1B17",
       "muted": "#6F665D",
       "border": "#DED7CE",
-      "accent": "#8B7762"
+      "accent": "#8B7762",
+      "hero-fade-target": "#171310"
     },
     "lumofield": {
       "bg": "#F7F2EA",
@@ -46,7 +47,8 @@
       "muted": "#75685A",
       "border": "#E4D7C8",
       "accent": "#B78B56",
-      "accentSoft": "#E9D4B6"
+      "accentSoft": "#E9D4B6",
+      "hero-fade-target": "#17120e"
     },
     "connect": {
       "bg": "#F4F5F6",
@@ -55,7 +57,8 @@
       "muted": "#66707A",
       "border": "#D6DCE2",
       "accent": "#4E6A84",
-      "accentSoft": "#DCE8F1"
+      "accentSoft": "#DCE8F1",
+      "hero-fade-target": "#1a2027"
     }
   },
   "buttons": {

@@ -20,7 +20,7 @@ import { contactChannels, contactContent, visualAssets } from '../data/site';
   />
 
   <SectionWrapper {...contactContent.intro}>
-    <div class="card-grid contact-grid">
+    <div class="card-grid">
       {
         contactChannels.map((channel) => (
           <Card eyebrow={channel.label} title={channel.value} body={channel.note} />

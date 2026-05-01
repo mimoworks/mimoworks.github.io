@@ -1,5 +1,6 @@
 ---
 import type { ThemeName } from '../data/site';
+import { getThemeStyle } from '../utils/theme';
 
 interface Props {
   eyebrow?: string;
@@ -9,10 +10,11 @@ interface Props {
   class?: string;
 }
 
-const { eyebrow, title, body, theme = 'core', class: className = '' } = Astro.props;
+const { eyebrow, title, body, theme, class: className = '' } = Astro.props;
+const themeStyle = getThemeStyle(theme);
 ---
 
-<section class:list={['section', `section-${theme}`, className]}>
+<section class:list={['section', className]} style={themeStyle}>
   <div class="site-shell">
     {
       (eyebrow || title || body) && (

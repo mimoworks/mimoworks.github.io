@@ -7,6 +7,9 @@ import CtaBand from '../components/CtaBand.astro';
 import ProductVisual from '../components/ProductVisual.astro';
 import { homeContent, lumofieldPieces, siteMeta, visualAssets } from '../data/site';
 import { withBase } from '../utils/url';
+import { getThemeStyle } from '../utils/theme';
+
+const connectThemeStyle = getThemeStyle('connect');
 ---
 
 <SiteLayout
@@ -20,13 +23,14 @@ import { withBase } from '../utils/url';
     theme="core"
     backgroundImage="/images/hero/lumofield-hero.jpg"
     backgroundPosition="80% center"
-    backgroundPositionMobile="72% center"
+    backgroundPositionTablet="60% center"
+    backgroundPositionMobile="54% center"
   />
 
   <SectionWrapper {...homeContent.intro}>
     <div class="brand-overview-grid">
       <Card {...homeContent.intro.cards[0]} image={visualAssets.bedside} />
-      <aside class="connect-brewing-card">
+      <aside class="connect-brewing-card" style={connectThemeStyle}>
         <p class="card-eyebrow">{homeContent.intro.cards[1].eyebrow}</p>
         <h3>{homeContent.intro.cards[1].title}</h3>
         <p>{homeContent.intro.cards[1].body}</p>

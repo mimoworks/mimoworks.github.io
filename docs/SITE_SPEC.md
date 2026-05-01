@@ -2,7 +2,7 @@
 
 ## Tech recommendation
 
-Use Astro + TypeScript + Tailwind CSS.
+Use Astro + TypeScript + Tailwind CSS (static-first).
 
 ## Why
 
@@ -40,7 +40,7 @@ Simple drawer or overlay. Keep it minimal.
 
 - mimoworks wordmark
 - primary nav
-- subtle CTA button or text link to Contact / Enquire
+- subtle CTA to Contact / Enquire
 
 ### Footer
 
@@ -58,6 +58,14 @@ Simple drawer or overlay. Keep it minimal.
 5. Connect teaser
 6. About / values
 7. Contact CTA
+
+## Hero behavior (implemented direction)
+
+- Mobile-first base layout
+- Mobile hero order: image block, then text, then CTA
+- Desktop hero enhancement: full-bleed background media with left text rail
+- No page-level card wrapper
+- Full-width sections with inner content containers
 
 ## Lumofield page structure
 
@@ -86,8 +94,7 @@ Simple drawer or overlay. Keep it minimal.
 
 Keep simple for v1:
 
-- email
-- Instagram
+- direct enquiry channels from `src/data/site.ts`
 - optional form later
 - optional WhatsApp later
 
@@ -100,6 +107,11 @@ Examples:
 - nav links
 - product line summaries
 - call-to-action copy
+
+Current implementation note:
+
+- `src/data/site.ts` is the normalized runtime content source
+- `content/SITE_COPY.yml` and config files remain editable upstream references
 
 ## Animation guidance
 

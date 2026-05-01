@@ -1,6 +1,7 @@
 ---
 import { withBase } from '../utils/url';
 import type { ThemeName } from '../data/site';
+import { getThemeStyle } from '../utils/theme';
 
 interface Props {
   title: string;
@@ -12,10 +13,11 @@ interface Props {
   theme?: ThemeName;
 }
 
-const { title, body, cta, theme = 'core' } = Astro.props;
+const { title, body, cta, theme } = Astro.props;
+const themeStyle = getThemeStyle(theme);
 ---
 
-<section class:list={['cta-band', `cta-${theme}`]}>
+<section class="cta-band" style={themeStyle}>
   <div class="site-shell cta-inner">
     <div>
       <h2>{title}</h2>
